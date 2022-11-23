@@ -27,14 +27,15 @@ namespace ConsoleApp5
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
         }
-        public override int Weight
+        public override double Weight
         {
             get => base.Weight;
             set
             {
                 try
                 {
-                    if (value > 200) { throw new Exception("Вес не может быть больше 200 кг"); }
+                    if (value > 450) 
+                    { throw new Exception("Вес не может быть больше 450 кг"); }
                     else { base.Weight = value; }
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -47,7 +48,8 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value > 500) { throw new Exception("Рост не может быть больше 5 метров"); }
+                    if (value > 500) 
+                    { throw new Exception("Рост не может быть больше 5 метров"); }
                     else { base.Height = value; }
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -95,6 +97,10 @@ namespace ConsoleApp5
         public virtual void Heal(int HealHealth)
         {
             Health += HealHealth;
+        }
+        public override string ToString()
+        {
+            return base.ToString() + $", урон дубинкой {clubDamage}";
         }
     }
 }

@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="ArrayFunc.cs" />
     <Compile Include="ConsoleApp4.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

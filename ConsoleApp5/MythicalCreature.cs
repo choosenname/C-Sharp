@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -9,66 +10,34 @@ using System.Xml.Serialization;
 
 namespace ConsoleApp5
 {
-    abstract internal class MythicalCreature
+    internal abstract class MythicalCreature
     {
-        string name;
+        protected string name;
         SexEnum sex;
-        int weight;
-        int height;
-        int age;
-        int health;
-        int damage;
+        protected double weight;
+        protected int height;
+        protected int age;
+        protected int health;
+        protected int damage;
+        protected Random random = new Random();
+        protected Regex regex = new Regex(@"\w{2,150}");
         public enum SexEnum
         {
             None,
             Male,
             Female
         }
-        protected virtual int Health
-        {
-            get => health;
-            set
-            {
-                if (value < 0)
-                {
-                    health = 0;
-                }
-                health = value;
-            }
-        }
-        protected virtual int Damage
-        {
-            get => damage;
-            set
-            {
-                if (value < 0)
-                {
-                    damage = 0;
-                }
-                damage = value;
-            }
-        }
-        public virtual void SetHealth() { Health = Weight + Height / Age; }
-        public virtual int GetHealth { get => Health; }
-        public virtual void SetDamage() { Damage = (Weight + Height / Age) / 12; }
-        public virtual int GetDamage { get => Damage; }
-        public virtual void UpdateParameters()
-        {
-            SetHealth();
-            SetDamage();
-        }
         public virtual string Name
         {
             get => name;
             set
             {
-                Regex regex = new Regex(@"\w{2,150}");
                 try
                 {
                     if (!regex.IsMatch(value))
                     { throw new Exception("Введенное имя не подходит"); }
                     else
-                        name = value;
+                    { name = value; }
                 }
                 catch (Exception ex)
                 { Console.WriteLine(ex.Message); }
@@ -83,18 +52,16 @@ namespace ConsoleApp5
                 {
                     if (value < 1)
                     { throw new Exception("Рост не может быть меньше 1"); }
-                    else if (value > 5000)
-                    { throw new Exception("Рост не может быть больше 50 метров"); }
+                    else if (value > 50000)
+                    { throw new Exception("Рост не может быть больше 5 км"); }
                     else
-                    {
-                        height = value;
-                    }
+                    { height = value; }
                 }
                 catch (Exception ex)
                 { Console.WriteLine(ex.Message); }
             }
         }
-        public virtual int Weight
+        public virtual double Weight
         {
             get => weight;
             set
@@ -106,9 +73,7 @@ namespace ConsoleApp5
                     else if (value > 50000)
                     { throw new Exception("Вес не может быть больше 50 тонн"); }
                     else
-                    {
-                        weight = value;
-                    }
+                    { weight = value; }
                 }
                 catch (Exception ex)
                 { Console.WriteLine(ex.Message); }
@@ -126,9 +91,7 @@ namespace ConsoleApp5
                     else if (value > 10000)
                     { throw new Exception("Возраст не может быть больше 10000 лет"); }
                     else
-                    {
-                        age = value;
-                    }
+                    { age = value; }
                 }
                 catch (Exception ex)
                 { Console.WriteLine(ex.Message); }
@@ -147,6 +110,18 @@ namespace ConsoleApp5
                 { Console.WriteLine(ex.Message); }
             }
         }
+        public virtual int Health
+        {
+            get => health;
+            protected set => health = value < 0 ? 0 : value;
+        }
+        public virtual int Damage
+        {
+            get => damage;
+            protected set => damage = value < 0 ? 0 : value;
+        }
+        public virtual void SetHealth() => Health = (int)Math.Round(Weight) + (Height / Age);
+        public virtual void SetDamage() => Damage = ((int)Math.Round(Weight) + (Height / Age)) / 12;
         public MythicalCreature(string name, int weight, int height, int age, SexEnum sex)
         {
             Name = name;
@@ -154,15 +129,33 @@ namespace ConsoleApp5
             Height = height;
             Age = age;
             Sex = sex;
-            UpdateParameters();
+            SetHealth();
+            SetDamage();
         }
         public override string ToString()
         {
-            return $"Имя {Name}, вес {Weight}, рост {Height}, возраст {Age}, пол {Sex}, здоровье {Health}, урон {Damage}";
+            return $"Класс {this.GetType()}: Имя {Name}, вес {Weight}, рост {Height}, возраст {Age}, пол {Sex}, здоровье {Health}, урон {Damage}";
         }
-        protected Random random = new Random();
         public abstract int Attack();
         public abstract void TakeHit(int damage);
         public abstract int SpecialAttack();
+
+        public virtual MythicalCreature Figth(MythicalCreature obj)
+        {
+            while (obj.Health > 0 && Health > 0)
+            {
+                if (random.Next(0, 4) != 0)
+                {
+                    TakeHit(obj.Attack());
+                    obj.TakeHit(Attack());
+                }
+                else
+                {
+                    TakeHit(obj.SpecialAttack());
+                    obj.TakeHit(SpecialAttack());
+                }
+            }
+            return Health < 1 ? obj : this;
+        }
     }
 }

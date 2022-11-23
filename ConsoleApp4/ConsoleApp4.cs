@@ -10,10 +10,8 @@ namespace ConsoleApp4
 {
     internal class A
     {
-        static void swap(ref int a, ref int b)
+        static void Main()
         {
-            (a, b) = (b, a);
         }
-
     }
 }

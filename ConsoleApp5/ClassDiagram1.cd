@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ConsoleApp5.MythicalCreature" Collapsed="true">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="ConsoleApp5.MythicalCreature.SexEnum" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MythicalCreature.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAACACABAAAxAQEAEQAAAQAIKAEAAAgEAQAAgAAAAg=</HashCode>
+      <FileName>MythicalCreature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.Dragon" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAIAAAAEAEAAAAAAAKAAAAAAEAAAAAAAAAg=</HashCode>
+      <FileName>Dragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.Ogr" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAACFAEAAAQAAAKAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Оgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.Wyvern" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAIAAAAGAAAAAAAAACAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Wyvern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.ArmoredOgr" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIACEACAAAAAAACAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>ArmoredOgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

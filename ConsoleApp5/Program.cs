@@ -11,13 +11,19 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            Dragon dragon = new Dragon("Драгобебр", 200, 5, 1, MythicalCreature.SexEnum.Male);
+            Dragon dragon = new Dragon("Драгобебр", 2000, 2500, 300, MythicalCreature.SexEnum.Male);
             Console.WriteLine(dragon);
-            for(int i = 0;i< 20;i++)
-            {
-                Console.WriteLine(dragon.Attack());
-                //Thread.Sleep(18);
-            }
+
+            Wyvern wyvern = new Wyvern("Дребр", 500, 250, 45, MythicalCreature.SexEnum.Female, 28);
+            Console.WriteLine(wyvern);
+
+            Ogr ogr = new Ogr("игорь", 350, 300, 25, MythicalCreature.SexEnum.None, 30);
+            Console.WriteLine(ogr);
+
+            ArmoredOgr armoredOgr = new ArmoredOgr("Бруско", 300, 250, 14, MythicalCreature.SexEnum.Male, 15, 15);
+            Console.WriteLine(armoredOgr);
+
+            Console.WriteLine(ogr.Figth(armoredOgr));
             Console.ReadLine();
         }
     }

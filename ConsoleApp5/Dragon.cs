@@ -9,17 +9,66 @@ namespace ConsoleApp5
 {
     internal class Dragon : MythicalCreature
     {
-        int FireDamage;
-        protected virtual void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2; }
-        public int GetFireDamege { get => FireDamage; }
-        public override void UpdateParameters()
+        protected int fireDamage;
+        public int FireDamage
         {
-            base.UpdateParameters();
-            SetFireDamage();
+            get => fireDamage;
+            protected set => fireDamage = value < 0 ? 0 : value;
         }
-        public Dragon(string name, int weight, int height, int age, SexEnum sex) : base(name, weight, height, age, sex) { }
+        public virtual void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2; }
+        public Dragon(string name, int weight, int height, int age, SexEnum sex) : base(name, weight, height, age, sex)
+        { SetFireDamage(); }
+        public override int Height
+        {
+            get => base.Height;
+            set
+            {
+                try
+                {
+                    if (value > 5000)
+                    { throw new Exception("Рост не может быть больше 50 м"); }
+                    else
+                    { base.Height = value; }
+                }
+                catch (Exception ex)
+                { Console.WriteLine(ex.Message); }
+            }
+        }
+        public override double Weight
+        {
+            get => base.Weight;
+            set
+            {
+                try
+                {
+                    if (value > 2000)
+                    { throw new Exception("Вес не может быть больше 2 тонн"); }
+                    else
+                    { base.Weight = value; }
+                }
+                catch (Exception ex)
+                { Console.WriteLine(ex.Message); }
+            }
+        }
+        public override int Age
+        {
+            get => base.Age;
+            set
+            {
+                try
+                {
+                    if (value > 1000)
+                    { throw new Exception("Возраст не может быть больше 1000 лет"); }
+                    else
+                    { base.Age = value; }
+                }
+                catch (Exception ex)
+                { Console.WriteLine(ex.Message); }
+            }
+        }
         public override int Attack()
         {
+            int damage;
             switch (random.Next(0, 5))
             {
                 case 0: return Damage / 2;
