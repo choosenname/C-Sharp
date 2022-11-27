@@ -36,13 +36,13 @@ namespace ConsoleApp5
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
         }
-        public ArmoredOgr(string name, int weight, int height, int age, SexEnum sex, int clubDamage, int armorProtection) : base(name, weight, height, age, sex, clubDamage)
+        public ArmoredOgr(string name, int weight, int height, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name, weight, height, age, sex, weaponDamage)
         {
             ArmorProtection = armorProtection;
         }
         public override void TakeHit(int damage)
         {
-            if (random.Next(0, 4) == 0) { damage -= armorProtection / 2; }
+            if (random.Next(0, 2) == 0) { damage -= armorProtection; }
             else { damage -= armorProtection / 2; }
             base.TakeHit(damage);
         }

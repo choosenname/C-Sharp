@@ -8,21 +8,21 @@ namespace ConsoleApp5
 {
     internal class Ogr : MythicalCreature
     {
-        int clubDamage;
-        public Ogr(string name, int weight, int height, int age, SexEnum sex, int clubDamage) : base(name, weight, height, age, sex)
+        int weaponDamage;
+        public Ogr(string name, int weight, int height, int age, SexEnum sex, int weaponDamage) : base(name, weight, height, age, sex)
         {
-            ClubDamage = clubDamage;
+            WeaponDamage = weaponDamage;
         }
-        public virtual int ClubDamage
+        public virtual int WeaponDamage
         {
-            get => clubDamage;
+            get => weaponDamage;
             set
             {
                 try
                 {
-                    if (value < 0) { throw new Exception("Урон дубинкой не может быть меньше 0"); }
-                    else if (value > 100) { throw new Exception("Урон дубинкой не может быть больше 100"); }
-                    else { clubDamage = value; }
+                    if (value < 0) { throw new Exception("Урон оружием не может быть меньше 0"); }
+                    else if (value > 100) { throw new Exception("Урон оружием не может быть больше 100"); }
+                    else { weaponDamage = value; }
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
@@ -34,7 +34,7 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value > 450) 
+                    if (value > 450)
                     { throw new Exception("Вес не может быть больше 450 кг"); }
                     else { base.Weight = value; }
                 }
@@ -48,7 +48,7 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value > 500) 
+                    if (value > 500)
                     { throw new Exception("Рост не может быть больше 5 метров"); }
                     else { base.Height = value; }
                 }
@@ -71,15 +71,24 @@ namespace ConsoleApp5
         public override int Attack()
         {
             if (random.Next(0, 5) == 0) { Heal(random.Next(0, 50)); }
-            if (Height > 4000)
-                return Damage + ClubDamage;
-            return Damage;
+            switch (random.Next(0, 3))
+            {
+                case 0:
+                    return Damage + WeaponDamage;
+                case 1:
+                    return Damage;
+                case 2:
+                    return Damage + WeaponDamage / 2;
+                default:
+                    return Damage;
+
+            }
         }
         public override void TakeHit(int damage)
         {
             switch (random.Next(0, 7))
             {
-                case 0: Health -= damage - ClubDamage; break;
+                case 0: Health -= damage - WeaponDamage; break;
                 case 1: Health -= damage / 2; break;
                 default: Health -= damage; break;
             }
@@ -88,10 +97,10 @@ namespace ConsoleApp5
         {
             switch (random.Next(0, 5))
             {
-                case 0: return Damage + ClubDamage;
-                case 1: return ClubDamage * 2;
+                case 0: return Damage + WeaponDamage;
+                case 1: return WeaponDamage * 2;
                 case 2: Heal(random.Next(20, 100)); return 0;
-                default: return ClubDamage;
+                default: return WeaponDamage;
             }
         }
         public virtual void Heal(int HealHealth)
@@ -100,7 +109,7 @@ namespace ConsoleApp5
         }
         public override string ToString()
         {
-            return base.ToString() + $", урон дубинкой {clubDamage}";
+            return base.ToString() + $", урон дубинкой {weaponDamage}";
         }
     }
 }

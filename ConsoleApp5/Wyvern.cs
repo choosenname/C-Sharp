@@ -8,7 +8,7 @@ namespace ConsoleApp5
 {
     internal class Wyvern : Dragon
     {
-        protected int diveDamage;
+        int diveDamage;
         public override void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2 + DiveDamage; }
         public Wyvern(string name, int weight, int height, int age, SexEnum sex, int diveDamage) : base(name, weight, height, age, sex)
         {

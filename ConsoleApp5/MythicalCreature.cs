@@ -10,22 +10,46 @@ using System.Xml.Serialization;
 
 namespace ConsoleApp5
 {
-    internal abstract class MythicalCreature
+    internal abstract class MythicalCreature : IComparable<MythicalCreature>
     {
-        protected string name;
+        string name;
         SexEnum sex;
-        protected double weight;
-        protected int height;
-        protected int age;
-        protected int health;
-        protected int damage;
+        double weight;
+        int height;
+        int age;
+        int health;
+        int damage;
         protected Random random = new Random();
-        protected Regex regex = new Regex(@"\w{2,150}");
         public enum SexEnum
         {
             None,
             Male,
             Female
+        }
+        public abstract int Attack();
+        public abstract void TakeHit(int damage);
+        public abstract int SpecialAttack();
+        public virtual void SetHealth() => health = (int)Math.Round(weight) + (height / age);
+        public virtual void SetDamage() => damage = ((int)Math.Round(weight) + (height / age)) / 12;
+        public virtual int Health
+        {
+            get => health;
+            protected set => health = value < 0 ? 0 : value;
+        }
+        public virtual int Damage
+        {
+            get => damage;
+            protected set => damage = value < 0 ? 0 : value;
+        }
+        public MythicalCreature(string name, int weight, int height, int age, SexEnum sex)
+        {
+            Name = name;
+            Weight = weight;
+            Height = height;
+            Age = age;
+            Sex = sex;
+            SetHealth();
+            SetDamage();
         }
         public virtual string Name
         {
@@ -34,6 +58,7 @@ namespace ConsoleApp5
             {
                 try
                 {
+                    Regex regex = new Regex(@"\w{2,150}");
                     if (!regex.IsMatch(value))
                     { throw new Exception("Введенное имя не подходит"); }
                     else
@@ -110,52 +135,36 @@ namespace ConsoleApp5
                 { Console.WriteLine(ex.Message); }
             }
         }
-        public virtual int Health
-        {
-            get => health;
-            protected set => health = value < 0 ? 0 : value;
-        }
-        public virtual int Damage
-        {
-            get => damage;
-            protected set => damage = value < 0 ? 0 : value;
-        }
-        public virtual void SetHealth() => Health = (int)Math.Round(Weight) + (Height / Age);
-        public virtual void SetDamage() => Damage = ((int)Math.Round(Weight) + (Height / Age)) / 12;
-        public MythicalCreature(string name, int weight, int height, int age, SexEnum sex)
-        {
-            Name = name;
-            Weight = weight;
-            Height = height;
-            Age = age;
-            Sex = sex;
-            SetHealth();
-            SetDamage();
-        }
         public override string ToString()
         {
-            return $"Класс {this.GetType()}: Имя {Name}, вес {Weight}, рост {Height}, возраст {Age}, пол {Sex}, здоровье {Health}, урон {Damage}";
+            return $"Класс {this.GetType()}: Имя {Name}, вес {Weight}, рост {Height}" +
+                $", возраст {Age}, пол {Sex}, здоровье {Health}, урон {Damage}";
         }
-        public abstract int Attack();
-        public abstract void TakeHit(int damage);
-        public abstract int SpecialAttack();
-
-        public virtual MythicalCreature Figth(MythicalCreature obj)
+        public virtual int Figth(MythicalCreature obj)
         {
-            while (obj.Health > 0 && Health > 0)
+            Console.WriteLine($"-------{Name} VS {obj.Name}-------");
+            while (obj.health > 0 && health > 0)
             {
                 if (random.Next(0, 4) != 0)
                 {
-                    TakeHit(obj.Attack());
-                    obj.TakeHit(Attack());
+                    int damage = obj.Attack(), damage1 = Attack();
+                    TakeHit(damage);
+                    obj.TakeHit(damage1);
+                    Console.WriteLine($"{Name} наносит урон {damage1}, {obj.Name} наносит урон {damage}");
                 }
                 else
                 {
-                    TakeHit(obj.SpecialAttack());
-                    obj.TakeHit(SpecialAttack());
+                    int damage = obj.SpecialAttack(), damage1 = SpecialAttack();
+                    TakeHit(damage);
+                    obj.TakeHit(damage1);
+                    Console.WriteLine($"(крит) {Name} наносит урон {damage1}, {obj.Name} наносит урон {damage}");
                 }
             }
-            return Health < 1 ? obj : this;
+            return Health - obj.Health;
+        }
+        public int CompareTo(MythicalCreature other)
+        {
+            return name.CompareTo(other.name);
         }
     }
 }

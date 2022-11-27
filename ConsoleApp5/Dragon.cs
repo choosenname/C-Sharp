@@ -9,7 +9,7 @@ namespace ConsoleApp5
 {
     internal class Dragon : MythicalCreature
     {
-        protected int fireDamage;
+        int fireDamage;
         public int FireDamage
         {
             get => fireDamage;
@@ -68,7 +68,6 @@ namespace ConsoleApp5
         }
         public override int Attack()
         {
-            int damage;
             switch (random.Next(0, 5))
             {
                 case 0: return Damage / 2;
@@ -79,6 +78,10 @@ namespace ConsoleApp5
                 default: return Damage;
             }
         }
+        public override void TakeHit(int damage)
+        {
+            Health -= damage;
+        }
         public override int SpecialAttack()
         {
             if (Age >= 200 || random.Next(0, 4) == 0)
@@ -87,10 +90,6 @@ namespace ConsoleApp5
                 return FireDamage - 50 > 0 ? FireDamage - 50 : FireDamage;
             else
                 return FireDamage;
-        }
-        public override void TakeHit(int damage)
-        {
-            Health -= damage;
         }
         public override string ToString()
         {
