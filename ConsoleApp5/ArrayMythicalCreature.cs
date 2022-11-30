@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -8,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp5
 {
-    internal class ArrayMythicalCreature
+    internal class ArrayMythicalCreature : IList<MythicalCreature>
     {
         public MythicalCreature[] ArrayOfMC { get; set; }
+
+        public int Count => ArrayOfMC.Length;
+
+        public bool IsReadOnly => false;
+
+        public MythicalCreature this[int index] { get => ArrayOfMC[index]; set => ArrayOfMC[index] = value; }
+
         internal ArrayMythicalCreature()
         {
             ArrayOfMC = new MythicalCreature[0];
@@ -141,6 +149,67 @@ namespace ConsoleApp5
                 }
             }
             return ArrayOfMC.Length - obj.ArrayOfMC.Length;
+        }
+
+        public int IndexOf(MythicalCreature item)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if (ArrayOfMC[i] == item)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void Insert(int index, MythicalCreature item)
+        {
+            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length + 1];
+
+            if (index > 0 && index < ArrayOfMC.Length)
+            {
+                for (int i = Count - 1; i > index; i--)
+                {
+                    ArrayOfMC[i] = ArrayOfMC[i - 1];
+                }
+                ArrayOfMC[index] = item;
+            }
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(MythicalCreature item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(MythicalCreature[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<MythicalCreature>.Remove(MythicalCreature item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<MythicalCreature> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

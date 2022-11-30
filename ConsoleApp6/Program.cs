@@ -10,26 +10,25 @@ namespace ConsoleApp6
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
-            Processor[] processors = new Processor[25];
-            for (int i = 0; i < processors.Length; i++)
-            {
-                processors[i] = new Processor(random);
-                Console.WriteLine(processors[i]);
-            }
+            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Исключение: {ex.Message}");
+            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Название приложения: {ex.Source}");
+            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
+            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Метод: {ex.TargetSite}");
+            Parallelogram parallelogram = new Parallelogram();
 
-            Console.WriteLine("-----------СОРТИРОВКА ПО ЦЕНЕ---------");
-            Array.Sort(processors);
-            foreach (var obj in processors)
-                Console.WriteLine(obj);
-            
-            Console.WriteLine("-----------СОРТИРОВКА---------");
-            Array.Sort(processors, new Processor());
-            foreach (var obj in processors)
-                Console.WriteLine(obj);
+            parallelogram.Square = 0;
+            parallelogram.ASide = 3;
+            Console.WriteLine(parallelogram.GetHeight());
 
-            Processor A = (Processor)processors[0].Clone();
-            Console.WriteLine("\n----------------\nОбъект {0}\nКлон {1}", processors[0], A);
+            Matrix.ExceptionNotify += ex => Console.WriteLine(ex);
+            Matrix matrix = new Matrix(new int[3, 3]
+            {   {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1}});
+
+            //matrix.EnterArr();
+            ArrayFunc.ArrayFunc.OutArr(matrix.Array);
+            Console.WriteLine(matrix?.IsOrthonormal());
         }
     }
 }

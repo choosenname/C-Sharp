@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Processor
+    interface IShowInfo
+    {
+        void ShowInfo();
+    }
+    internal class Processor: ICloneable, IComparable<Processor>, IComparer<Processor>, IShowInfo
     {
         internal enum ProcessorModels
         {
@@ -133,6 +137,35 @@ namespace ConsoleApp2
             cache = tmp;
 
             cost = random.Next(43, 1000) + Math.Round(random.NextDouble(), 3);
+        }
+        public object Clone()
+        {
+            return new Processor(model, clockRate, cache, cost);
+        }
+
+        public int CompareTo(Processor other)
+        {
+            return Math.Sign(cost - other.cost);
+        }
+
+        public int Compare(Processor x, Processor y)
+        {
+            int resolt = x.model.ToString().CompareTo(y.model.ToString());
+            if (resolt == 0)
+            {
+                resolt = x.model.ToString().Length - y.model.ToString().Length;
+                if (resolt == 0)
+                {
+                    resolt = Math.Sign(x.clockRate - y.clockRate);
+                    if (resolt == 0)
+                        resolt = x.CompareTo(y);
+                }
+            }
+            return resolt;
+        }
+        public void ShowInfo()
+        {
+            Console.WriteLine(ToString());
         }
     }
 }

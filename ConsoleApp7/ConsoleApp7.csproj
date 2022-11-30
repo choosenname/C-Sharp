@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35F17B6C-CD62-43C1-9214-F815870783B6}</ProjectGuid>
+    <ProjectGuid>{1E784642-FB0D-4AFB-AE68-0BDD4D6640F5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp6</RootNamespace>
-    <AssemblyName>ConsoleApp6</AssemblyName>
+    <RootNamespace>ConsoleApp7</RootNamespace>
+    <AssemblyName>ConsoleApp7</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,10 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayFunc.cs" />
-    <Compile Include="Exception.cs" />
-    <Compile Include="Matrix.cs" />
-    <Compile Include="Parallelogram.cs" />
+    <Compile Include="Car.cs" />
+    <Compile Include="CarPark.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

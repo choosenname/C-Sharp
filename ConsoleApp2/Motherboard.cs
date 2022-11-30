@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Motherboard
+    internal class Motherboard : ICloneable, IComparable<Motherboard>, IComparer<Motherboard>, IShowInfo
     {
-        internal Processor Processor {get;set;}
+        internal Processor Processor { get; set; }
         int ram;
         internal int RAM
         {
@@ -64,6 +64,29 @@ namespace ConsoleApp2
             if (tmp % 2 != 0)
                 tmp++;
             ram = tmp;
+        }
+
+        public object Clone()
+        {
+            return new Motherboard(Processor.Model, Processor.ClockRate, Processor.Cache, Processor.Cost, ram);
+        }
+
+        public int CompareTo(Motherboard other)
+        {
+            return ram - other.RAM;
+        }
+
+        public int Compare(Motherboard x, Motherboard y)
+        {
+            int resolt = x.Processor.Compare(x.Processor, y.Processor);
+            if (resolt == 0)
+                resolt = x.CompareTo(y);
+            return resolt;
+        }
+
+        public void ShowInfo()
+        {
+            Console.WriteLine(ToString());
         }
     }
 }
