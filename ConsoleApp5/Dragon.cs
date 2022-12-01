@@ -16,7 +16,7 @@ namespace ConsoleApp5
             protected set => fireDamage = value < 0 ? 0 : value;
         }
         public virtual void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2; }
-        public Dragon(string name, int weight, int height, int age, SexEnum sex) : base(name, weight, height, age, sex)
+        public Dragon(string name, double weight, int height, int age, SexEnum sex) : base(name, weight, height, age, sex)
         { SetFireDamage(); }
         public override int Height
         {
@@ -94,6 +94,11 @@ namespace ConsoleApp5
         public override string ToString()
         {
             return base.ToString() + $", огненный урон {FireDamage}";
+        }
+
+        public override object Clone()
+        {
+            return new Dragon(Name, Weight, Height, Age, Sex);
         }
     }
 }

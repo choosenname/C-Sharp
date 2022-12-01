@@ -5,15 +5,8 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="ConsoleApp5.MythicalCreature.SexEnum" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>MythicalCreature.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAACACABAAAxAQEAEQAAAQAIKAEAAAgEAQAAgAAAAg=</HashCode>
+      <HashCode>AAAACACABAAAxAQEAEQAAAQAIKAEAAAgEAQAAgAAABg=</HashCode>
       <FileName>MythicalCreature.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -21,40 +14,41 @@
   <Class Name="ConsoleApp5.Dragon">
     <Position X="8.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAABAIAAAAEAEAAAAAAAKAAAAAAEAAAAAAAAAg=</HashCode>
+      <HashCode>AAAACAAABAIAAAAEAEAAAAAAAKAAAAAAEAAAAAAAABg=</HashCode>
       <FileName>Dragon.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.Wyvern">
     <Position X="10.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAIAAAAGAAAAAAAAACAAAAAAEAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAIAAAAGAAAAAAAAACAAAAAAEAAAAAAAABA=</HashCode>
       <FileName>Wyvern.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.Ogr">
     <Position X="4.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAACEAEAAAAAAAKAAAAAAEBAAAAAQAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAACEAEAAAAAAAKAAAAAAEBAAAAAQABA=</HashCode>
       <FileName>Оgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.ArmoredOgr">
     <Position X="2.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIACEACAAAAAAACAAAAAAEAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIACEACAAAAAAACAAAAAAEAAAAAAAABA=</HashCode>
       <FileName>ArmoredOgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.ArrayMythicalCreature">
     <Position X="12" Y="0.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAEgAAAQAAEAAAABAAAIAAAAAAAAAAAIAAAAAA=</HashCode>
+      <HashCode>AEIAAEAEgAAAQBQUCAAABAQAIAAEAAAECAAAIABQIBA=</HashCode>
       <FileName>ArrayMythicalCreature.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleApp5.Program">
-    <Position X="12.25" Y="4" Width="1.5" />
+    <Position X="14.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>

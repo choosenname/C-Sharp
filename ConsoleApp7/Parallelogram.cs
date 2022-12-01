@@ -55,6 +55,26 @@ namespace ConsoleApp6
             }
         }
 
-        public double GetHeight() => square / aSide;
+        public double GetHeight
+        {
+            get
+            {
+                try
+                {
+                    if (aSide == 0) throw new DivideByZeroException();
+                    return square / aSide;
+                }
+                catch (DivideByZeroException ex)
+                {
+                    ExceptionNotify?.Invoke(ex);
+                    aSide = 1;
+                }
+                catch (Exception ex)
+                {
+                    ExceptionNotify?.Invoke(ex);
+                }
+                return 0;
+            }
+        }
     }
 }

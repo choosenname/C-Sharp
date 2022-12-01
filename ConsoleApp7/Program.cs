@@ -13,8 +13,8 @@ namespace ConsoleApp7
         {
             CarPark carPark = new CarPark(new Car[] {
                 new Car(4578, "Игорь Брусков", Color.Aqua, true),
-                new Car(5236, "Бебров", Color.Tan, false),
-                new Car(7878, "Курсед", Color.Magenta, true) });
+                new Car(5236, "аебров", Color.Tan, false),
+                new Car(778, "Курсед", Color.Magenta, true) });
 
             Console.WriteLine("Найти машину с водителем Бебров " + carPark.FindCars(car => car.LastName == "Бебров"));
 

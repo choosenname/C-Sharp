@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace YourNameSpace
+namespace ArrayFunc
 {
-    internal class ArrayFunc
+    static internal class ArrayFunc
     {
-        static public void EnterArr(out int[] arr, int n)
+
+        static internal void EnterArr(out int[] arr, int n)
         {
             arr = new int[n];
             Random rnd = new Random();
@@ -12,7 +13,8 @@ namespace YourNameSpace
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = rnd.Next(-99, 100);
         }
-        static public void EnterArr(out int[,] arr, int n, int m)
+
+        static internal void EnterArr(out int[,] arr, int n, int m)
         {
             arr = new int[n, m];
             Random rnd = new Random();
@@ -21,7 +23,8 @@ namespace YourNameSpace
                 for (int j = 0; j < arr.GetLength(1); j++)
                     arr[i, j] = rnd.Next(-99, 100);
         }
-        static public void EnterArr(out double[] arr, int n)
+
+        static internal void EnterArr(out double[] arr, int n)
         {
             arr = new double[n];
             Random rnd = new Random();
@@ -29,7 +32,8 @@ namespace YourNameSpace
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = rnd.Next(-99, 100) + Math.Round(rnd.NextDouble(), 2);
         }
-        static public void EnterArr(out double[,] arr, int n, int m)
+
+        static internal void EnterArr(out double[,] arr, int n, int m)
         {
             arr = new double[n, m];
             Random rnd = new Random();
@@ -38,14 +42,18 @@ namespace YourNameSpace
                 for (int j = 0; j < arr.GetLength(1); j++)
                     arr[i, j] = rnd.Next(-99, 100) + Math.Round(rnd.NextDouble(), 2);
         }
-        static public void OutArr<T>(T[] arr)
+
+        static internal void OutArr<T>(T[] arr)
         {
+            if (arr is null || arr.Length is 0) return;
             for (int i = 0; i < arr.Length; i++)
                 Console.Write(arr[i] + " ");
             Console.WriteLine();
         }
-        static public void OutArr<T>(T[,] arr)
+
+        static internal void OutArr<T>(T[,] arr)
         {
+            if (arr is null || arr.Length is 0) return;
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 for (int j = 0; j < arr.GetLength(1); j++)

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp5
 {
-    internal class ArrayMythicalCreature : IList<MythicalCreature>
+    internal class ArrayMythicalCreature : IList<MythicalCreature>, IComparable<ArrayMythicalCreature>, ICloneable
     {
         public MythicalCreature[] ArrayOfMC { get; set; }
 
@@ -50,19 +51,6 @@ namespace ConsoleApp5
             }
             ArrayOfMC = NewMythicalCreatures;
         }
-        public void Remove(MythicalCreature obj)
-        {
-            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length - 1];
-            for (int i = 0, j = 0; i < ArrayOfMC.Length && j < NewMythicalCreatures.Length; i++)
-            {
-                if (ArrayOfMC[i].CompareTo(obj) != 0)
-                {
-                    NewMythicalCreatures[j] = ArrayOfMC[i];
-                    j++;
-                }
-            }
-            ArrayOfMC = NewMythicalCreatures;
-        }
         public void Remove(int index)
         {
             MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length - 1];
@@ -79,9 +67,14 @@ namespace ConsoleApp5
         public override string ToString()
         {
             string str = null;
-            for (int i = 0; i < ArrayOfMC.Length; i++)
+            for (int i = 0; i < Count; i++)
                 str += ArrayOfMC[i] + "\n";
             return str;
+        }
+        public void Show()
+        {
+            for (int i = 0; i < Count; i++)
+                Console.WriteLine(i + ". " + ArrayOfMC[i]);
         }
         public MythicalCreature MaxDamage()
         {
@@ -113,16 +106,7 @@ namespace ConsoleApp5
         }
         public void SortByName()
         {
-            for (int write = 0; write < ArrayOfMC.Length; write++)
-            {
-                for (int sort = 0; sort < ArrayOfMC.Length - 1; sort++)
-                {
-                    if (ArrayOfMC[sort].Name.CompareTo(ArrayOfMC[sort + 1].Name) > 0)
-                    {
-                        (ArrayOfMC[sort], ArrayOfMC[sort + 1]) = (ArrayOfMC[sort + 1], ArrayOfMC[sort]);
-                    }
-                }
-            }
+            Array.Sort(ArrayOfMC);
         }
         public int Figth(ArrayMythicalCreature obj)
         {
@@ -167,49 +151,146 @@ namespace ConsoleApp5
         {
             MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length + 1];
 
-            if (index > 0 && index < ArrayOfMC.Length)
+            if (index > 0 && index < Count)
             {
-                for (int i = Count - 1; i > index; i--)
+                for (int i = 0; i < index; i++)
                 {
-                    ArrayOfMC[i] = ArrayOfMC[i - 1];
+                    NewMythicalCreatures[i] = ArrayOfMC[i];
                 }
-                ArrayOfMC[index] = item;
+
+                NewMythicalCreatures[index] = item;
+
+                for (int i = Count; i > index; i--)
+                {
+                    NewMythicalCreatures[i] = ArrayOfMC[i - 1];
+                }
             }
+            ArrayOfMC = NewMythicalCreatures;
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[Count - 1 - index];
+
+            if ((index >= 0) && (index < Count))
+            {
+                for (int i = index, j = 0; i < Count - 1; i++, j++)
+                {
+                    NewMythicalCreatures[j] = ArrayOfMC[i + 1];
+                }
+            }
+            ArrayOfMC = NewMythicalCreatures;
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            ArrayOfMC = new MythicalCreature[0];
         }
 
         public bool Contains(MythicalCreature item)
         {
-            throw new NotImplementedException();
+            if (item == null) return false;
+
+            foreach (MythicalCreature mc in ArrayOfMC)
+                if (mc == item) return true;
+
+            return false;
         }
 
         public void CopyTo(MythicalCreature[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Count; i++)
+            {
+                array.SetValue(ArrayOfMC[i], arrayIndex++);
+            }
         }
 
-        bool ICollection<MythicalCreature>.Remove(MythicalCreature item)
+        public bool Remove(MythicalCreature item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Count; i++)
+            {
+                if (ArrayOfMC[i].CompareTo(item) == 0)
+                {
+                    Remove(i);
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public IEnumerator<MythicalCreature> GetEnumerator()
+        public IEnumerator<MythicalCreature> GetEnumerator() => new ArrayMythicalCreatureEnum(ArrayOfMC);
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public int CompareTo(ArrayMythicalCreature other)
         {
-            throw new NotImplementedException();
+            return ArrayOfMC.Length - other.ArrayOfMC.Length;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public object Clone()
         {
-            throw new NotImplementedException();
+            return new ArrayMythicalCreature(ArrayOfMC);
+        }
+    }
+
+    class ArrayMythicalCreatureEnum : IEnumerator<MythicalCreature>
+    {
+        public MythicalCreature[] mythicalCreatures;
+
+        int position = -1;
+
+        public ArrayMythicalCreatureEnum(MythicalCreature[] mythicalCreatures)
+        {
+            this.mythicalCreatures = mythicalCreatures;
+        }
+
+        public object Current
+        {
+            get
+            {
+                try
+                {
+                    if (position == -1 || position >= mythicalCreatures.Length)
+                        throw new IndexOutOfRangeException();
+                    return mythicalCreatures[position];
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return null;
+            }
+        }
+
+        MythicalCreature IEnumerator<MythicalCreature>.Current
+        {
+            get
+            {
+                try
+                {
+                    if (position == -1 || position >= mythicalCreatures.Length)
+                        throw new IndexOutOfRangeException();
+                    return mythicalCreatures[position];
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return null;
+            }
+        }
+
+        public void Dispose() { }
+
+        public bool MoveNext()
+        {
+            position++;
+            return position < mythicalCreatures.Length;
+        }
+
+        public void Reset()
+        {
+            position = -1;
         }
     }
 }

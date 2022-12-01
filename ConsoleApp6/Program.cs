@@ -10,25 +10,15 @@ namespace ConsoleApp6
     {
         static void Main(string[] args)
         {
-            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Исключение: {ex.Message}");
-            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Название приложения: {ex.Source}");
-            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
-            Parallelogram.ExceptionNotify += ex => Console.WriteLine($"Метод: {ex.TargetSite}");
-            Parallelogram parallelogram = new Parallelogram();
+            Student student1 = new Student(3, 3, 12, 6, 4);
+        }
 
-            parallelogram.Square = 0;
-            parallelogram.ASide = 3;
-            Console.WriteLine(parallelogram.GetHeight());
-
-            Matrix.ExceptionNotify += ex => Console.WriteLine(ex);
-            Matrix matrix = new Matrix(new int[3, 3]
-            {   {1, 0, 0},
-                {0, 1, 0},
-                {0, 0, 1}});
-
-            //matrix.EnterArr();
-            ArrayFunc.ArrayFunc.OutArr(matrix.Array);
-            Console.WriteLine(matrix?.IsOrthonormal());
+        public static void ShowExeption(Exception ex)
+        {
+            Console.WriteLine($"Исключение: {ex.Message}");
+            Console.WriteLine($"Название приложения: {ex.Source}");
+            Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
+            Console.WriteLine($"Метод: {ex.TargetSite}");
         }
     }
 }

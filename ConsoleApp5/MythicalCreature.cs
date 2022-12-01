@@ -10,7 +10,13 @@ using System.Xml.Serialization;
 
 namespace ConsoleApp5
 {
-    internal abstract class MythicalCreature : IComparable<MythicalCreature>
+    public enum SexEnum
+    {
+        None,
+        Male,
+        Female
+    }
+    internal abstract class MythicalCreature : IComparable<MythicalCreature>, ICloneable
     {
         string name;
         SexEnum sex;
@@ -20,12 +26,6 @@ namespace ConsoleApp5
         int health;
         int damage;
         protected Random random = new Random();
-        public enum SexEnum
-        {
-            None,
-            Male,
-            Female
-        }
         public abstract int Attack();
         public abstract void TakeHit(int damage);
         public abstract int SpecialAttack();
@@ -41,7 +41,7 @@ namespace ConsoleApp5
             get => damage;
             protected set => damage = value < 0 ? 0 : value;
         }
-        public MythicalCreature(string name, int weight, int height, int age, SexEnum sex)
+        public MythicalCreature(string name, double weight, int height, int age, SexEnum sex)
         {
             Name = name;
             Weight = weight;
@@ -166,5 +166,7 @@ namespace ConsoleApp5
         {
             return name.CompareTo(other.name);
         }
+
+        public abstract object Clone();
     }
 }

@@ -9,6 +9,10 @@ namespace ConsoleApp5
     internal class ArmoredOgr : Ogr
     {
         int armorProtection;
+        public ArmoredOgr(string name, double weight, int height, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name, weight, height, age, sex, weaponDamage)
+        {
+            ArmorProtection = armorProtection;
+        }
         public int ArmorProtection
         {
             get => armorProtection;
@@ -36,10 +40,6 @@ namespace ConsoleApp5
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
         }
-        public ArmoredOgr(string name, int weight, int height, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name, weight, height, age, sex, weaponDamage)
-        {
-            ArmorProtection = armorProtection;
-        }
         public override void TakeHit(int damage)
         {
             if (random.Next(0, 2) == 0) { damage -= armorProtection; }
@@ -54,6 +54,11 @@ namespace ConsoleApp5
         public override string ToString()
         {
             return base.ToString() + $", защита брони {armorProtection}";
+        }
+
+        public override object Clone()
+        {
+            return new ArmoredOgr(Name, Weight, Height, Age, Sex, WeaponDamage, ArmorProtection);
         }
     }
 }

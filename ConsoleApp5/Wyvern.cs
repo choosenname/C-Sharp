@@ -10,7 +10,7 @@ namespace ConsoleApp5
     {
         int diveDamage;
         public override void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2 + DiveDamage; }
-        public Wyvern(string name, int weight, int height, int age, SexEnum sex, int diveDamage) : base(name, weight, height, age, sex)
+        public Wyvern(string name, double weight, int height, int age, SexEnum sex, int diveDamage) : base(name, weight, height, age, sex)
         {
             DiveDamage = diveDamage;
             SetFireDamage();
@@ -63,6 +63,11 @@ namespace ConsoleApp5
         public override string ToString()
         {
             return base.ToString()+ $", урон при пикировании {DiveDamage}";
+        }
+
+        public override object Clone()
+        {
+            return new Wyvern(Name, Weight, Height, Age, Sex, DiveDamage);
         }
     }
 }

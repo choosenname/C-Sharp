@@ -11,53 +11,85 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            Dragon dragon = new Dragon("Драгобебр", 2000, 2500, 300, MythicalCreature.SexEnum.Male);
-            Console.WriteLine(dragon);
-
-            Wyvern wyvern = new Wyvern("Дребр", 500, 250, 45, MythicalCreature.SexEnum.Female, 28);
-            Console.WriteLine(wyvern);
-
-            Ogr ogr = new Ogr("игорь Бруско", 350, 300, 25, MythicalCreature.SexEnum.None, 30);
-            Console.WriteLine(ogr);
-
-            ArmoredOgr armoredOgr = new ArmoredOgr("Куско", 300, 250, 14, MythicalCreature.SexEnum.Male, 15, 15);
-            Console.WriteLine(armoredOgr);
+            ArmoredOgr armoredOgr = new ArmoredOgr("Куско", 300, 250, 14, SexEnum.Male, 15, 15);
+            Ogr ogr = new Ogr("игорь Бруско", 350, 300, 25, SexEnum.None, 30);
+            Wyvern wyvern = new Wyvern("Дребр", 500, 250, 45, SexEnum.Female, 28);
 
 
-            Console.WriteLine("-------------------------------");
-            ArrayMythicalCreature array = new ArrayMythicalCreature();
-            array.Add(new MythicalCreature[] { armoredOgr, ogr, wyvern, dragon });
+            ArrayMythicalCreature array = new ArrayMythicalCreature
+            {
+                new MythicalCreature[] { armoredOgr, ogr, wyvern,
+                new Ogr("лешка", 250, 300, 30, SexEnum.Male, 50),
+                new ArmoredOgr("cursed", 300, 400, 25, SexEnum.Female, 100, 30),
+                new Dragon("draconchik", 1500, 1500, 10, SexEnum.None),
+                new ArmoredOgr("John Xina", 350, 500, 11, SexEnum.None, 75, 50),
+                new ArmoredOgr("лепешка", 300, 400, 25, SexEnum.Female, 100, 30),}
+            };
+
+            int index = 0;
+            foreach (var item in array)
+                Console.WriteLine(index++ + ". " + item);
+
+
+            Console.WriteLine("Метод IndexOf");
+            Console.WriteLine(array.IndexOf(wyvern));
+
+
+            Console.WriteLine("Метод Insert");
+
+            Dragon dragon = new Dragon("Драгобебр", 2000, 2500, 300, SexEnum.Male);
+
+            array.Insert(array.IndexOf(wyvern), dragon);
+
+            index = 0;
+            foreach (var item in array)
+                Console.WriteLine(index++ + ". " + item);
+
+
+            Console.WriteLine("Метод RemoveAt");
+            array.RemoveAt(3);
+            array.Show();
+
+
+            Console.WriteLine("Метод Add");
+            array.Add(wyvern);
+            array.Show();
+
+
+            Console.WriteLine("Метод Remove");
+            array.Remove(new ArmoredOgr("лепешка", 300, 400, 25, SexEnum.Female, 100, 30));
+            array.Show();
+
+
+            Console.WriteLine("Метод Contains");
+            Console.WriteLine(array.Contains(wyvern));
+
+
+            Console.WriteLine("Метод CopyTo");
+            MythicalCreature[] array1 = new MythicalCreature[array.Count + 4];
+            array.CopyTo(array1, 4);
+            index = 0;
+            foreach (var item in array1)
+                Console.WriteLine(index++ + ". " + item);
+
+            array.SortByName();
             Console.WriteLine(array);
 
-            Console.WriteLine("Больше всего урона: " + array.MaxDamage());
-            Console.WriteLine("Меньше всего здоровья: " + array.MinHealth());
+            MythicalCreature mythical = array.MaxDamage();
+            Console.WriteLine(mythical);
 
-            Console.WriteLine("----------Отсортированный массив------------");
-            //array.SortByName();
-            Array.Sort(array.ArrayOfMC);
-            Console.WriteLine(array);
+            array.Clear();
+            array.Show();
 
-            int a = ogr.Figth(armoredOgr);
-            if (a == 0) Console.WriteLine("Ничья");
-            else if(a > 0) Console.WriteLine("Победитель: {0}\nПроигравший: {1}", ogr, armoredOgr);
-            else Console.WriteLine("Победитель: {0}\nПроигравший: {1}", armoredOgr, ogr);
-
-            Console.WriteLine("-------------------------------");
-            array.Remove(dragon);
-            array.Add(new MythicalCreature[] {
-                new Ogr("лешка", 250, 300, 30, MythicalCreature.SexEnum.Male, 50),
-                new ArmoredOgr("cursed", 300, 400, 25, MythicalCreature.SexEnum.Female, 100, 30),
-                new Dragon("draconchik", 1500, 1500, 10, MythicalCreature.SexEnum.None),
-                new ArmoredOgr("John Xina", 350, 500, 11, MythicalCreature.SexEnum.None, 75, 50),
-                new ArmoredOgr("лепешка", 300, 400, 25, MythicalCreature.SexEnum.Female, 100, 30),});
-
-            ArrayMythicalCreature array1 = new ArrayMythicalCreature();
-            array1.Add(new MythicalCreature[] { dragon,
-                new ArmoredOgr("Лазупин", 300, 400, 25, MythicalCreature.SexEnum.Female, 100, 30)});
+            /*ArrayMythicalCreature array1 = new ArrayMythicalCreature
+            {
+                new MythicalCreature[] { dragon,
+                new ArmoredOgr("Лазупин", 300, 400, 25, MythicalCreature.SexEnum.Female, 100, 30)}
+            };
 
             Console.WriteLine($"{array}\nVS\n{array1}");
 
-            Console.WriteLine("\n\nПобедители:\n{0}", array.Figth(array1) > 0 ? array : array1);
+            Console.WriteLine("\n\nПобедители:\n{0}", array.Figth(array1) > 0 ? array : array1);*/
 
             Console.ReadLine();
         }

@@ -9,7 +9,7 @@ namespace ConsoleApp5
     internal class Ogr : MythicalCreature
     {
         int weaponDamage;
-        public Ogr(string name, int weight, int height, int age, SexEnum sex, int weaponDamage) : base(name, weight, height, age, sex)
+        public Ogr(string name, double weight, int height, int age, SexEnum sex, int weaponDamage) : base(name, weight, height, age, sex)
         {
             WeaponDamage = weaponDamage;
         }
@@ -110,6 +110,11 @@ namespace ConsoleApp5
         public override string ToString()
         {
             return base.ToString() + $", урон дубинкой {weaponDamage}";
+        }
+
+        public override object Clone()
+        {
+            return new Ogr(Name, Weight, Height, Age, Sex, WeaponDamage);
         }
     }
 }
