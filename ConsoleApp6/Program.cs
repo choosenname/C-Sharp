@@ -10,7 +10,9 @@ namespace ConsoleApp6
     {
         static void Main(string[] args)
         {
+            Student.ShowExeption = ShowExeption;
             Student student1 = new Student(3, 3, 12, 6, 4);
+
         }
 
         public static void ShowExeption(Exception ex)

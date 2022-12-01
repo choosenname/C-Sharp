@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exception;
 
 namespace ConsoleApp6
 {
@@ -16,8 +17,7 @@ namespace ConsoleApp6
 
         public int AvailableHours { get; private set; } = 24;
 
-        delegate void ShowExeptionFunc(Exception ex);
-        ShowExeptionFunc ShowExeption;
+        public static ShowExeptionFunc ShowExeption;
 
         public Student()
         {
@@ -33,9 +33,9 @@ namespace ConsoleApp6
             this.AverageScore = AverageScore;
             try
             {
-                if (AvailableHours != 0) throw new Exception("Сумма всех часов должна быть 24");
+                if (AvailableHours != 0) throw new StudentException("Сумма всех часов должна быть 24");
             }
-            catch (Exception ex)
+            catch (StudentException ex)
             {
                 ShowExeption(ex);
             }
@@ -43,7 +43,28 @@ namespace ConsoleApp6
 
         public int HourForSleep
         {
-            
+            get => hoursForSleep;
+            set
+            {
+                try
+                {
+                    if (value < 0) throw new LessThenZeroException();
+                    else if (value > 24) throw new SumIsMoreThen24HourException();
+                    hoursForSleep = value;
+                }
+                catch (LessThenZeroException ex)
+                {
+                    ShowExeption(ex);
+                }
+                catch (SumIsMoreThen24HourException ex)
+                {
+                    ShowExeption(ex);
+                }
+                catch (StudentException ex)
+                {
+                    ShowExeption(ex);
+                }
+            }
         }
 
         public int HourForEat
@@ -54,7 +75,7 @@ namespace ConsoleApp6
                 try
                 {
                     if (value < 0) throw new LessThenZeroException();
-                    else if (AvailableHours - value < 0) throw new MoreThen24HourException();
+                    else if (AvailableHours - value < 0) throw new SumIsMoreThen24HourException();
                     else
                     {
                         hoursForEat = value;
@@ -65,11 +86,11 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (MoreThen24HourException ex)
+                catch (SumIsMoreThen24HourException ex)
                 {
                     ShowExeption(ex);
                 }
-                catch (Exception ex)
+                catch (StudentException ex)
                 {
                     ShowExeption(ex);
                 }
@@ -84,7 +105,7 @@ namespace ConsoleApp6
                 try
                 {
                     if (value < 0) throw new LessThenZeroException();
-                    else if (AvailableHours - value < 0) throw new MoreThen24HourException();
+                    else if (AvailableHours - value < 0) throw new SumIsMoreThen24HourException();
                     else
                     {
                         hoursForStudy = value;
@@ -95,11 +116,11 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (MoreThen24HourException ex)
+                catch (SumIsMoreThen24HourException ex)
                 {
                     ShowExeption(ex);
                 }
-                catch (Exception ex)
+                catch (StudentException ex)
                 {
                     ShowExeption(ex);
                 }
@@ -114,18 +135,18 @@ namespace ConsoleApp6
                 try
                 {
                     if (value < 0) throw new LessThenZeroException();
-                    else if (AvailableHours - value < 0) throw new MoreThen24HourException();
+                    else if (AvailableHours - value < 0) throw new SumIsMoreThen24HourException();
                     else hoursForLife = value;
                 }
                 catch (LessThenZeroException ex)
                 {
                     ShowExeption(ex);
                 }
-                catch (MoreThen24HourException ex)
+                catch (SumIsMoreThen24HourException ex)
                 {
                     ShowExeption(ex);
                 }
-                catch (Exception ex)
+                catch (StudentException ex)
                 {
                     ShowExeption(ex);
                 }
@@ -151,7 +172,7 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (Exception ex)
+                catch (StudentException ex)
                 {
                     ShowExeption(ex);
                 }
@@ -174,7 +195,7 @@ namespace ConsoleApp6
             {
                 ShowExeption(ex);
             }
-            catch (Exception ex)
+            catch (StudentException ex)
             {
                 ShowExeption(ex);
             }
@@ -184,8 +205,6 @@ namespace ConsoleApp6
         {
             return String.Format("Студент спит {0} часов, ест {1} часов, учится {2} часов, ну и личная жизнь {3} часов, средний балл {4}", HourForSleep, HourForEat, HourForStudy, HourForLife, AverageScore);
         }
-
-        public 
 
         public void PriorityOccupation()
         {

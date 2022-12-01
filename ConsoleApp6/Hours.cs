@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exception;
 
 namespace ConsoleApp6
 {
-    public enum TypeOfHoursEnum
+    public enum HourTypeEnum
     {
         HourForSleep,
         HourForEat,
@@ -17,7 +18,10 @@ namespace ConsoleApp6
     internal class Hours
     {
         int countOfHours;
-        int hourType;
+
+        public HourTypeEnum HourType { get; set; }
+
+        public static ShowExeptionFunc ShowExeption;
 
         public int CountOfHours
         {
@@ -28,7 +32,7 @@ namespace ConsoleApp6
                 {
                     if (value < 0) throw new LessThenZeroException();
                     else if (value > 24) throw new MoreThen24HourException();
-                        countOfHours = value;
+                    countOfHours = value;
                 }
                 catch (LessThenZeroException ex)
                 {
@@ -38,7 +42,7 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (Exception ex)
+                catch (StudentException ex)
                 {
                     ShowExeption(ex);
                 }
