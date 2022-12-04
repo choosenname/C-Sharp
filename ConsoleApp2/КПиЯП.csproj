@@ -43,11 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MotherboardArray.cs" />
-    <Compile Include="DoubleDifference.cs" />
-    <Compile Include="DoubleDifferenceWithX.cs" />
-    <Compile Include="Motherboard.cs" />
-    <Compile Include="Processor.cs" />
     <Compile Include="КПиЯП.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

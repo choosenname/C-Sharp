@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp5
 {
@@ -10,7 +6,7 @@ namespace ConsoleApp5
     {
         int armorProtection;
 
-        public ArmoredOgr(string name, int height, double weight, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name,  height, weight, age, sex, weaponDamage)
+        public ArmoredOgr(string name, int height, double weight, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name, height, weight, age, sex, weaponDamage)
         {
             ArmorProtection = armorProtection;
         }
