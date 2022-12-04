@@ -9,10 +9,14 @@ namespace ConsoleApp5
     internal class Ogr : MythicalCreature
     {
         int weaponDamage;
-        public Ogr(string name, double weight, int height, int age, SexEnum sex, int weaponDamage) : base(name, weight, height, age, sex)
+
+        public Ogr(string name, int height, double weight, int age, SexEnum sex, int weaponDamage) : base(name, height, weight, age, sex)
         {
             WeaponDamage = weaponDamage;
         }
+
+        protected virtual (int, int) WeaponDamageRange { get; } = (0, 100);
+
         public virtual int WeaponDamage
         {
             get => weaponDamage;
@@ -20,54 +24,23 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value < 0) { throw new Exception("Урон оружием не может быть меньше 0"); }
-                    else if (value > 100) { throw new Exception("Урон оружием не может быть больше 100"); }
-                    else { weaponDamage = value; }
+                    if (value < WeaponDamageRange.Item1 || value > WeaponDamageRange.Item2) { throw new ArgumentOutOfRangeException(WeaponDamageRange); }
+                    else
+                    {
+                        weaponDamage = value;
+                    }
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (ArgumentOutOfRangeException ex) { ShowExeption(ex); weaponDamage = WeaponDamageRange.Item1; }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
-        public override double Weight
-        {
-            get => base.Weight;
-            set
-            {
-                try
-                {
-                    if (value > 450)
-                    { throw new Exception("Вес не может быть больше 450 кг"); }
-                    else { base.Weight = value; }
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-            }
-        }
-        public override int Height
-        {
-            get => base.Height;
-            set
-            {
-                try
-                {
-                    if (value > 500)
-                    { throw new Exception("Рост не может быть больше 5 метров"); }
-                    else { base.Height = value; }
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-            }
-        }
-        public override int Age
-        {
-            get => base.Age;
-            set
-            {
-                try
-                {
-                    if (value > 100) { throw new Exception("Возраст не может быть больше 100 лет"); }
-                    else { base.Age = value; }
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-            }
-        }
+
+        protected override (int, int) WeightRange { get; } = (1, 450);
+
+        protected override (int, int) HeightRange { get; } = (1, 500);
+
+        protected override (int, int) AgeRange { get; } = (1, 100);
+
         public override int Attack()
         {
             if (random.Next(0, 5) == 0) { Heal(random.Next(0, 50)); }
@@ -114,7 +87,7 @@ namespace ConsoleApp5
 
         public override object Clone()
         {
-            return new Ogr(Name, Weight, Height, Age, Sex, WeaponDamage);
+            return new Ogr(Name, Height, Weight, Age, Sex, WeaponDamage);
         }
     }
 }

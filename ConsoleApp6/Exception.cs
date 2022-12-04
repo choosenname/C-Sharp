@@ -34,6 +34,13 @@ namespace Exception
         public SumIsNot24HourException(string message) : base(message) { }
     }
 
+    internal class StudentNullReferenceException : System.NullReferenceException
+    {
+        public StudentNullReferenceException() : base() { }
+
+        public StudentNullReferenceException(string message) : base(message) { }
+    }
+
     internal class StudentException : System.Exception
     {
         public StudentException() : base() { }

@@ -9,37 +9,34 @@ namespace ConsoleApp5
     internal class ArmoredOgr : Ogr
     {
         int armorProtection;
-        public ArmoredOgr(string name, double weight, int height, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name, weight, height, age, sex, weaponDamage)
+
+        public ArmoredOgr(string name, int height, double weight, int age, SexEnum sex, int weaponDamage, int armorProtection) : base(name,  height, weight, age, sex, weaponDamage)
         {
             ArmorProtection = armorProtection;
         }
-        public int ArmorProtection
+
+        protected virtual (int, int) ArmorProtectionRange { get; } = (0, 50);
+
+        public virtual int ArmorProtection
         {
             get => armorProtection;
             set
             {
                 try
                 {
-                    if (value < 0) { throw new Exception("Защита не может быть меньше 0"); }
-                    else if (value > 50) { throw new Exception("Защита не может быть больше 50"); }
-                    else { armorProtection = value; }
+                    if (value < ArmorProtectionRange.Item1 || value > ArmorProtectionRange.Item2) throw new ArgumentOutOfRangeException(ArmorProtectionRange);
+                    else
+                    {
+                        armorProtection = value;
+                    }
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (ArgumentOutOfRangeException ex) { ShowExeption(ex); armorProtection = ArmorProtectionRange.Item1; }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
-        public override double Weight
-        {
-            get => base.Weight;
-            set
-            {
-                try
-                {
-                    if (value > 350) { throw new Exception("Вес не может быть больше 350 кг"); }
-                    else { base.Weight = value; }
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-            }
-        }
+
+        protected override (int, int) WeightRange { get; } = (1, 350);
+
         public override void TakeHit(int damage)
         {
             if (random.Next(0, 2) == 0) { damage -= armorProtection; }
@@ -58,7 +55,7 @@ namespace ConsoleApp5
 
         public override object Clone()
         {
-            return new ArmoredOgr(Name, Weight, Height, Age, Sex, WeaponDamage, ArmorProtection);
+            return new ArmoredOgr(Name, Height, Weight, Age, Sex, WeaponDamage, ArmorProtection);
         }
     }
 }

@@ -7,9 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp5
 {
-    internal class Program
+    internal class MainMC
     {
         static void Main(string[] args)
+        {
+            Dragon dragon = new Dragon("dttttttt", 5000, 250, 300, SexEnum.Male);
+
+            Console.ReadLine();
+        }
+
+        
+        /*static void Main(string[] args)
         {
             ArmoredOgr armoredOgr = new ArmoredOgr("Куско", 300, 250, 14, SexEnum.Male, 15, 15);
             Ogr ogr = new Ogr("игорь Бруско", 350, 300, 25, SexEnum.None, 30);
@@ -89,9 +97,9 @@ namespace ConsoleApp5
 
             Console.WriteLine($"{array}\nVS\n{array1}");
 
-            Console.WriteLine("\n\nПобедители:\n{0}", array.Figth(array1) > 0 ? array : array1);*/
+            Console.WriteLine("\n\nПобедители:\n{0}", array.Figth(array1) > 0 ? array : array1);//
 
             Console.ReadLine();
-        }
+        }*/
     }
 }

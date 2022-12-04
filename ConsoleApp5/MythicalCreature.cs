@@ -25,32 +25,43 @@ namespace ConsoleApp5
         int age;
         int health;
         int damage;
+
+        protected Regex regex = new Regex(@"\w{2,150}");
         protected Random random = new Random();
+
         public abstract int Attack();
+
         public abstract void TakeHit(int damage);
+
         public abstract int SpecialAttack();
+
         public virtual void SetHealth() => health = (int)Math.Round(weight) + (height / age);
+
         public virtual void SetDamage() => damage = ((int)Math.Round(weight) + (height / age)) / 12;
+
         public virtual int Health
         {
             get => health;
             protected set => health = value < 0 ? 0 : value;
         }
+
         public virtual int Damage
         {
             get => damage;
             protected set => damage = value < 0 ? 0 : value;
         }
-        public MythicalCreature(string name, double weight, int height, int age, SexEnum sex)
+
+        public MythicalCreature(string name, int height, double weight, int age, SexEnum sex)
         {
             Name = name;
-            Weight = weight;
             Height = height;
+            Weight = weight;
             Age = age;
             Sex = sex;
             SetHealth();
             SetDamage();
         }
+
         public virtual string Name
         {
             get => name;
@@ -58,16 +69,19 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    Regex regex = new Regex(@"\w{2,150}");
-                    if (!regex.IsMatch(value))
-                    { throw new Exception("Введенное имя не подходит"); }
+                    if (!regex.IsMatch(value)) throw new InvalidNameException();
                     else
-                    { name = value; }
+                    {
+                        name = value;
+                    }
                 }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
+                catch (InvalidNameException ex) { ShowExeption(ex); name = "none"; }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
+
+        protected virtual (int, int) HeightRange { get; } = (1, 50000);
+
         public virtual int Height
         {
             get => height;
@@ -75,17 +89,19 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value < 1)
-                    { throw new Exception("Рост не может быть меньше 1"); }
-                    else if (value > 50000)
-                    { throw new Exception("Рост не может быть больше 5 км"); }
+                    if (value < HeightRange.Item1 || value > HeightRange.Item2) throw new ArgumentOutOfRangeException(HeightRange);
                     else
-                    { height = value; }
+                    {
+                        height = value;
+                    }
                 }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
+                catch (ArgumentOutOfRangeException ex) { ShowExeption(ex); height = HeightRange.Item1; }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
+
+        protected virtual (int, int) WeightRange { get; } = (1, 50000);
+
         public virtual double Weight
         {
             get => weight;
@@ -93,17 +109,19 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value < 1)
-                    { throw new Exception("Вес не может быть меньше 1"); }
-                    else if (value > 50000)
-                    { throw new Exception("Вес не может быть больше 50 тонн"); }
+                    if (value < WeightRange.Item1 || value > WeightRange.Item2) throw new ArgumentOutOfRangeException(WeightRange);
                     else
-                    { weight = value; }
+                    {
+                        weight = value;
+                    }
                 }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
+                catch (ArgumentOutOfRangeException ex) { ShowExeption(ex); weight = WeightRange.Item1; }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
+
+        protected virtual (int, int) AgeRange { get; } = (1, 10000);
+
         public virtual int Age
         {
             get => age;
@@ -111,17 +129,17 @@ namespace ConsoleApp5
             {
                 try
                 {
-                    if (value < 1)
-                    { throw new Exception("Возраст не может быть меньше 1"); }
-                    else if (value > 10000)
-                    { throw new Exception("Возраст не может быть больше 10000 лет"); }
+                    if (value < AgeRange.Item1 || value > AgeRange.Item2) throw new ArgumentOutOfRangeException(AgeRange);
                     else
-                    { age = value; }
+                    {
+                        age = value;
+                    }
                 }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
+                catch (ArgumentOutOfRangeException ex) { ShowExeption(ex); age = AgeRange.Item1; }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
+
         public virtual SexEnum Sex
         {
             get => sex;
@@ -131,15 +149,16 @@ namespace ConsoleApp5
                 {
                     sex = value;
                 }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
+                catch (Exception ex) { ShowExeption(ex); }
             }
         }
+
         public override string ToString()
         {
             return $"Класс {this.GetType()}: Имя {Name}, вес {Weight}, рост {Height}" +
                 $", возраст {Age}, пол {Sex}, здоровье {Health}, урон {Damage}";
         }
+
         public virtual int Figth(MythicalCreature obj)
         {
             Console.WriteLine($"-------{Name} VS {obj.Name}-------");
@@ -162,9 +181,18 @@ namespace ConsoleApp5
             }
             return Health - obj.Health;
         }
+
         public int CompareTo(MythicalCreature other)
         {
             return name.CompareTo(other.name);
+        }
+
+        protected virtual void ShowExeption(Exception ex)
+        {
+            Console.WriteLine($"Исключение: {ex.Message}");
+            Console.WriteLine($"Название приложения: {ex.Source}");
+            Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
+            Console.WriteLine($"Метод: {ex.TargetSite}");
         }
 
         public abstract object Clone();
