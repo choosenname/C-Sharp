@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using Exception;
@@ -9,10 +10,10 @@ namespace ConsoleApp6
 {
     internal class Student
     {
-        int hoursForSleep = 0;
-        int hoursForEat = 0;
-        int hoursForStudy = 0;
-        int hoursForLife = 0;
+        Hours hoursForSleep = new Hours();
+        Hours hourForEat = new Hours();
+        Hours hourForStudy = new Hours();
+        Hours hourForLife = new Hours();
         int averageScore;
 
         public int AvailableHours { get; private set; } = 24;
@@ -22,6 +23,11 @@ namespace ConsoleApp6
         public Student()
         {
             Enter();
+        }
+
+        public Student(Random random)
+        {
+            Enter(random);
         }
 
         public Student(int HourForSleep, int HourForEat, int HourForStudy, int HourForLife, int AverageScore)
@@ -39,18 +45,31 @@ namespace ConsoleApp6
             {
                 ShowExeption(ex);
             }
+            catch (ArgumentException ex)
+            {
+                ShowExeption(ex);
+            }
+            catch (System.Exception ex)
+            {
+                ShowExeption(ex);
+            }
         }
 
         public int HourForSleep
         {
-            get => hoursForSleep;
+            get => hoursForSleep.CountOfHours;
             set
             {
                 try
                 {
-                    if (value < 0) throw new LessThenZeroException();
-                    else if (value > 24) throw new SumIsMoreThen24HourException();
-                    hoursForSleep = value;
+                    int newHour = value - HourForSleep;
+                    if (AvailableHours - newHour < 0) throw new SumIsMoreThen24HourException();
+                    else
+                    {
+                        AvailableHours -= newHour;
+
+                        hoursForSleep = new Hours(value, HourTypeEnum.HourForSleep);
+                    }
                 }
                 catch (LessThenZeroException ex)
                 {
@@ -58,9 +77,14 @@ namespace ConsoleApp6
                 }
                 catch (SumIsMoreThen24HourException ex)
                 {
+                    Console.WriteLine(AvailableHours);
                     ShowExeption(ex);
                 }
-                catch (StudentException ex)
+                catch (ArgumentException ex)
+                {
+                    ShowExeption(ex);
+                }
+                catch (System.Exception ex)
                 {
                     ShowExeption(ex);
                 }
@@ -69,17 +93,18 @@ namespace ConsoleApp6
 
         public int HourForEat
         {
-            get => hoursForEat;
+            get => hourForEat.CountOfHours;
             set
             {
                 try
                 {
-                    if (value < 0) throw new LessThenZeroException();
-                    else if (AvailableHours - value < 0) throw new SumIsMoreThen24HourException();
+                    int newHour = value - HourForEat;
+                    if (AvailableHours - newHour < 0) throw new SumIsMoreThen24HourException();
                     else
                     {
-                        hoursForEat = value;
-                        AvailableHours -= value;
+                        AvailableHours -= newHour;
+
+                        hourForEat = new Hours(value, HourTypeEnum.HourForEat);
                     }
                 }
                 catch (LessThenZeroException ex)
@@ -90,7 +115,11 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (StudentException ex)
+                catch (ArgumentException ex)
+                {
+                    ShowExeption(ex);
+                }
+                catch (System.Exception ex)
                 {
                     ShowExeption(ex);
                 }
@@ -99,17 +128,18 @@ namespace ConsoleApp6
 
         public int HourForStudy
         {
-            get => hoursForStudy;
+            get => hourForStudy.CountOfHours;
             set
             {
                 try
                 {
-                    if (value < 0) throw new LessThenZeroException();
-                    else if (AvailableHours - value < 0) throw new SumIsMoreThen24HourException();
+                    int newHour = value - HourForStudy;
+                    if (AvailableHours - newHour < 0) throw new SumIsMoreThen24HourException();
                     else
                     {
-                        hoursForStudy = value;
-                        AvailableHours -= value;
+                        AvailableHours -= newHour;
+
+                        hourForStudy = new Hours(value, HourTypeEnum.HourForStudy);
                     }
                 }
                 catch (LessThenZeroException ex)
@@ -120,7 +150,11 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (StudentException ex)
+                catch (ArgumentException ex)
+                {
+                    ShowExeption(ex);
+                }
+                catch (System.Exception ex)
                 {
                     ShowExeption(ex);
                 }
@@ -129,14 +163,19 @@ namespace ConsoleApp6
 
         public int HourForLife
         {
-            get => hoursForLife;
+            get => hourForLife.CountOfHours;
             set
             {
                 try
                 {
-                    if (value < 0) throw new LessThenZeroException();
-                    else if (AvailableHours - value < 0) throw new SumIsMoreThen24HourException();
-                    else hoursForLife = value;
+                    int newHour = value - HourForLife;
+                    if (AvailableHours - newHour < 0) throw new SumIsMoreThen24HourException();
+                    else
+                    {
+                        AvailableHours -= newHour;
+
+                        hourForLife = new Hours(value, HourTypeEnum.HourForStudy);
+                    }
                 }
                 catch (LessThenZeroException ex)
                 {
@@ -146,7 +185,11 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (StudentException ex)
+                catch (ArgumentException ex)
+                {
+                    ShowExeption(ex);
+                }
+                catch (System.Exception ex)
                 {
                     ShowExeption(ex);
                 }
@@ -172,7 +215,7 @@ namespace ConsoleApp6
                 {
                     ShowExeption(ex);
                 }
-                catch (StudentException ex)
+                catch (System.Exception ex)
                 {
                     ShowExeption(ex);
                 }
@@ -183,17 +226,25 @@ namespace ConsoleApp6
         {
             try
             {
-                HourForSleep = Convert.ToInt32(Console.ReadLine());
-                HourForEat = Convert.ToInt32(Console.ReadLine());
-                HourForStudy = Convert.ToInt32(Console.ReadLine());
-                HourForLife = Convert.ToInt32(Console.ReadLine());
-                if (AvailableHours != 0) throw new SumIsNot24HourException();
+                do
+                {
+                    Console.WriteLine("Сумма всех часов должна быть 24");
+                    Console.WriteLine("Введите количество часов для сна");
+                    HourForSleep = Convert.ToInt32(Console.ReadLine());
 
+                    Console.WriteLine("Введите количество часов для покушат");
+                    HourForEat = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("Введите количество часов для учебы");
+                    HourForStudy = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("Введите количество часов для личной жизни");
+                    HourForLife = Convert.ToInt32(Console.ReadLine());
+                }
+                while (AvailableHours != 0);
+
+                Console.WriteLine("Введите средний балл");
                 AverageScore = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (SumIsNot24HourException ex)
-            {
-                ShowExeption(ex);
             }
             catch (StudentException ex)
             {
@@ -201,13 +252,35 @@ namespace ConsoleApp6
             }
         }
 
+        public void Enter(Random random)
+        {
+            do
+            {
+                HourForSleep += random.Next(0, (AvailableHours + 1) / 2 + 1);
+
+                HourForEat += random.Next(0, (AvailableHours + 1) / 2 + 1);
+
+                HourForStudy += random.Next(0, (AvailableHours + 1) / 2 + 1);
+
+                HourForLife += random.Next(0, (AvailableHours + 1) / 2 + 1);
+            }
+            while (AvailableHours != 0);
+            AverageScore = random.Next(0, 11);
+        }
+
         public override string ToString()
         {
             return String.Format("Студент спит {0} часов, ест {1} часов, учится {2} часов, ну и личная жизнь {3} часов, средний балл {4}", HourForSleep, HourForEat, HourForStudy, HourForLife, AverageScore);
         }
 
-        public void PriorityOccupation()
+        Hours Max(Hours h1, Hours h2)
         {
+            return h1 > h2 ? h1 : h2;
+        }
+
+        public Hours PriorityOccupation()
+        {
+            return Max(Max(hoursForSleep, hourForEat), Max(hourForStudy, hourForLife));
         }
     }
 }

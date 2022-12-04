@@ -46,8 +46,9 @@
     <Compile Include="ArrayMythicalCreature.cs" />
     <Compile Include="Dragon.cs" />
     <Compile Include="ArmoredOgr.cs" />
+    <Compile Include="Exception.cs" />
     <Compile Include="MythicalCreature.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MainMC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wyvern.cs" />
     <Compile Include="Оgr.cs" />

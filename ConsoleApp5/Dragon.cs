@@ -10,62 +10,27 @@ namespace ConsoleApp5
     internal class Dragon : MythicalCreature
     {
         int fireDamage;
+
         public int FireDamage
         {
             get => fireDamage;
-            protected set => fireDamage = value < 0 ? 0 : value;
+            protected set
+            {
+                fireDamage = value < 0 ? 0 : value;
+            }
         }
+
         public virtual void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2; }
-        public Dragon(string name, double weight, int height, int age, SexEnum sex) : base(name, weight, height, age, sex)
+
+        public Dragon(string name, int height, double weight, int age, SexEnum sex) : base(name, height, weight, age, sex)
         { SetFireDamage(); }
-        public override int Height
-        {
-            get => base.Height;
-            set
-            {
-                try
-                {
-                    if (value > 5000)
-                    { throw new Exception("Рост не может быть больше 50 м"); }
-                    else
-                    { base.Height = value; }
-                }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
-            }
-        }
-        public override double Weight
-        {
-            get => base.Weight;
-            set
-            {
-                try
-                {
-                    if (value > 2000)
-                    { throw new Exception("Вес не может быть больше 2 тонн"); }
-                    else
-                    { base.Weight = value; }
-                }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
-            }
-        }
-        public override int Age
-        {
-            get => base.Age;
-            set
-            {
-                try
-                {
-                    if (value > 1000)
-                    { throw new Exception("Возраст не может быть больше 1000 лет"); }
-                    else
-                    { base.Age = value; }
-                }
-                catch (Exception ex)
-                { Console.WriteLine(ex.Message); }
-            }
-        }
+
+        protected override (int, int) HeightRange { get; } = (1, 5000);
+
+        protected override (int, int) WeightRange { get; } = (1, 2000);
+
+        protected override (int, int) AgeRange { get; } = (1, 1000);
+
         public override int Attack()
         {
             switch (random.Next(0, 5))
@@ -78,10 +43,12 @@ namespace ConsoleApp5
                 default: return Damage;
             }
         }
+
         public override void TakeHit(int damage)
         {
             Health -= damage;
         }
+
         public override int SpecialAttack()
         {
             if (Age >= 200 || random.Next(0, 4) == 0)
@@ -91,6 +58,7 @@ namespace ConsoleApp5
             else
                 return FireDamage;
         }
+
         public override string ToString()
         {
             return base.ToString() + $", огненный урон {FireDamage}";
@@ -98,7 +66,7 @@ namespace ConsoleApp5
 
         public override object Clone()
         {
-            return new Dragon(Name, Weight, Height, Age, Sex);
+            return new Dragon(Name, Height, Weight, Age, Sex);
         }
     }
 }
