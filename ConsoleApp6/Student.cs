@@ -40,10 +40,6 @@ namespace ConsoleApp6
             {
                 ShowExeption(ex);
             }
-            catch (ArgumentException ex)
-            {
-                ShowExeption(ex);
-            }
             catch (System.Exception ex)
             {
                 ShowExeption(ex);

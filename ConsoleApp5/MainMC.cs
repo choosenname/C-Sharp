@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleApp5
 {
@@ -11,12 +6,12 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            Dragon dragon = new Dragon("dttttttt", 5000, 250, 300, SexEnum.Male);
+            Dragon dragon = new Dragon("e", 50000, 250, 300, SexEnum.Male);
 
             Console.ReadLine();
         }
 
-        
+
         /*static void Main(string[] args)
         {
             ArmoredOgr armoredOgr = new ArmoredOgr("Куско", 300, 250, 14, SexEnum.Male, 15, 15);

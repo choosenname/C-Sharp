@@ -37,6 +37,4 @@ namespace ConsoleApp5
 
         public ArgumentOutOfRangeException(string message) : base(message) { }
     }
-
-    internal delegate void ShowExeptionFunc(System.Exception ex);
 }

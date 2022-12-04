@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exception
 {
@@ -16,7 +12,7 @@ namespace Exception
     internal class SumIsMoreThen24HourException : ArgumentException
     {
         public SumIsMoreThen24HourException() : base("Сумма всех часов не может превышать 24") { }
-        
+
         public SumIsMoreThen24HourException(string message) : base(message) { }
     }
 

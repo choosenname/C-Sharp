@@ -6,7 +6,7 @@
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAACACABAAAxAQEAEQAAAQAIKAEAAAgEAQAAgAAABg=</HashCode>
+      <HashCode>AIAAGAGABAAAxAQMAEQAAAQAIKAEAAAgEAQAAgAAABg=</HashCode>
       <FileName>MythicalCreature.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -14,28 +14,28 @@
   <Class Name="ConsoleApp5.Dragon">
     <Position X="8.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAABAIAAAAEAEAAAAAAAKAAAAAAEAAAAAAAABg=</HashCode>
+      <HashCode>AIAAGAAAAAIAAAAMAEAAAAAAAIAAAAAAEAAAAAAAABg=</HashCode>
       <FileName>Dragon.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.Wyvern">
     <Position X="10.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAIAAAAGAAAAAAAAACAAAAAAEAAAAAAAABA=</HashCode>
+      <HashCode>AAAAEAAAAAIAAAAOAAAAAAAABAAAAAAAEAAAAAAAABA=</HashCode>
       <FileName>Wyvern.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.Ogr">
     <Position X="4.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAACEAEAAAAAAAKAAAAAAEBAAAAAQABA=</HashCode>
+      <HashCode>AIAAEAAAAAAAAACMAEAAAAAAAIAAAAAAEBAIAAAQABA=</HashCode>
       <FileName>Оgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApp5.ArmoredOgr">
     <Position X="2.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIACEACAAAAAAACAAAAAAEAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAJACEACAAAAAAACAAAAAAEAAAAAAAABA=</HashCode>
       <FileName>ArmoredOgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -47,11 +47,39 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ConsoleApp5.Program">
+  <Class Name="ConsoleApp5.MainMC">
     <Position X="14.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
+      <FileName>MainMC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.InvalidNameException">
+    <Position X="13.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exception.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.ArgumentLessThenZeroException">
+    <Position X="12" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exception.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.ArgumentLessOrZeroException">
+    <Position X="10.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exception.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleApp5.ArgumentOutOfRangeException">
+    <Position X="8.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exception.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
