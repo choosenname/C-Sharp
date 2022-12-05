@@ -14,8 +14,10 @@ namespace ConsoleApp7
             OneDimensional arr = new OneDimensional(15);
             Console.WriteLine(">>>" + arr.Average());
             arr.Show();
-            arr.SortMoreThenAverage();
+            arr.Sort((a, b) => a < b);
             arr.Show();
+            arr.PreviousByNext((a, b) => a * b);
+            arr.ShowWithCurrency();
         }
     }
 }
