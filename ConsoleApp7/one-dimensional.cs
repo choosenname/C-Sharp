@@ -46,9 +46,9 @@ namespace ConsoleApp7
             return sum / Arr.Length;
         }
 
-        public delegate bool Difference(double x, double y);
+        delegate bool Difference(double x, double y);
 
-        public void Sort(Difference difference)
+        public void Sort()
         {
             try
             {
@@ -56,7 +56,7 @@ namespace ConsoleApp7
                 Difference func;
                 for (int i = 0; i < arr.Length; i++)
                 {
-                    if (difference(arr[i], average)) func = (x, y) => x > y;
+                    if (arr[i] < average) func = (x, y) => x > y;
                     else func = (x, y) => x < y;
 
                     for (int j = i; j < arr.Length; j++)
@@ -68,17 +68,22 @@ namespace ConsoleApp7
                     }
                 }
             }
-            catch (NullReferenceException ex) { ShowExeption(ex); Sort((a, b) => a < b); }
             catch (Exception ex) { ShowExeption(ex); }
         }
 
-        public delegate double Func(double a, double b);
+        public delegate double FuncPrevByNext(double a, double b);
 
-        public void PreviousByNext(Func func)
+        public void PreviousByNext(FuncPrevByNext func)
         {
-            arr[0] = func(arr[0], arr[arr.Length - 1]);
-            for (int i = 1; i < arr.Length; i++)
-                arr[i] = func(arr[i], arr[i - 1]);
+            try
+            {
+                if (func == null) throw new NullReferenceException("Делегат пуст");
+                arr[0] = func(arr[0], arr[arr.Length - 1]);
+                for (int i = 1; i < arr.Length; i++)
+                    arr[i] = func(arr[i], arr[i - 1]);
+            }
+            catch (NullReferenceException ex) { ShowExeption(ex); }
+            catch(Exception ex) { ShowExeption(ex); }
         }
 
         public void ShowWithCurrency()
