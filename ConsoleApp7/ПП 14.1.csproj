@@ -44,10 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="CarPark.cs" />
-    <Compile Include="Exceptions.cs" />
-    <Compile Include="Parallelogram.cs" />
+    <Compile Include="ArrayFunc.cs" />
+    <Compile Include="one-dimensional.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

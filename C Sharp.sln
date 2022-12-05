@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp5", "ConsoleApp5\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП13.1", "ConsoleApp6\ПП13.1.csproj", "{35F17B6C-CD62-43C1-9214-F815870783B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp7", "ConsoleApp7\ConsoleApp7.csproj", "{1E784642-FB0D-4AFB-AE68-0BDD4D6640F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 14.1", "ConsoleApp7\ПП 14.1.csproj", "{1E784642-FB0D-4AFB-AE68-0BDD4D6640F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
