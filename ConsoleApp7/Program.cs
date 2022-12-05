@@ -11,19 +11,65 @@ namespace ConsoleApp7
     {
         static void Main(string[] args)
         {
-            CarPark carPark = new CarPark(new Car[] {
-                new Car(4578, "Игорь Брусков", Color.Aqua, true),
-                new Car(5236, "аебров", Color.Tan, false),
-                new Car(778, "Курсед", Color.Magenta, true) });
 
-            Console.WriteLine("Найти машину с водителем Бебров " + carPark.FindCars(car => car.LastName == "Бебров"));
+            OneDimensional arr;
+            while (true)
+            {
+                Console.WriteLine("Введите размер массива");
+                try
+                {
+                    int n = Convert.ToInt32(Console.ReadLine());
+                    if (n < 1) throw new ArgumentOutOfRangeException("Размер массива не может быть меньше 1");
+                    else
+                    {
+                        arr = new OneDimensional(n);
+                        break;
+                    }
+                }
+                catch (Exception ex) { ShowException(ex); }
+            }
+            arr.Show();
 
-            Console.WriteLine("Вывести все машины на парковке");
-            carPark.ShowCars(car => car.IsOnParking);
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Выберете действие 1 - Вывести массив, 2 - Найти среднее по модулю, 3 - Отсортировать массив, 4 - Обработать массив, 5 - Выход");
+                    switch (Convert.ToInt32(Console.ReadLine()))
+                    {
+                        case 1: { arr.Show(); break; }
+                        case 2: { Console.WriteLine(">>>" + arr.Average()); break; }
+                        case 3: { arr.Sort(); break; }
+                        case 4:
+                            {
+                                bool flag = true;
+                                OneDimensional.FuncPrevByNext func = null;
+                                Console.WriteLine("Какое действие вы хотите выполнить (*,/,+,-)");
+                                switch (Console.ReadLine())
+                                {
+                                    case "*": func = (a, b) => a * b; break;
+                                    case "/": func = (a, b) => a / b; break;
+                                    case "+": func = (a, b) => a + b; break;
+                                    case "-": func = (a, b) => a - b; break;
+                                    default: Console.WriteLine("Неверное значение"); flag = false; break;
+                                }
 
-            Console.WriteLine("----------");
-            carPark[2] = new Car(1488, "Боб", Color.Azure, false);
-            Console.WriteLine(carPark[2]);
+                                if (flag)
+                                {
+                                    arr.PreviousByNext(func);
+                                    arr.ShowWithCurrency();
+                                }
+                                break;
+                            }
+                        case 5: return;
+                        default: { Console.WriteLine("Неверное значение, повторите ввод"); break; }
+                    }
+                }
+                catch (FormatException ex) { ShowException(ex); }
+                catch (Exception ex) { ShowException(ex); }
+            }
         }
+
+        static void ShowException(Exception ex) { Console.WriteLine(ex); }
     }
 }
