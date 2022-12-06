@@ -8,12 +8,12 @@ namespace ConsoleApp6
 {
     class StudyGroupEventArgs
     {
-        public string Message { get; private set; }
+        public string Message { get; }
 
 
-        public int Boys { get; private set; } = 0;
+        public int Boys { get; } = 0;
 
-        public int Girls { get; private set; } = 0;
+        public int Girls { get; } = 0;
 
         public StudyGroupEventArgs(string mes, int boys)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp6
             Message = mes;
             Boys = boys;
         }
-        
+
         public StudyGroupEventArgs(string mes, int boys, int girls)
         {
 
