@@ -78,12 +78,15 @@ namespace ConsoleApp7
             try
             {
                 if (func == null) throw new NullReferenceException("Делегат пуст");
-                arr[0] = func(arr[0], arr[arr.Length - 1]);
-                for (int i = 1; i < arr.Length; i++)
-                    arr[i] = func(arr[i], arr[i - 1]);
+                else if (arr.Length == 1) return;
+                else
+                {
+                    arr[0] = func(arr[0], arr[arr.Length - 1]);
+                    for (int i = 1; i < arr.Length; i++)
+                        arr[i] = func(arr[i], arr[i - 1]);
+                }
             }
-            catch (NullReferenceException ex) { ShowExeption(ex); }
-            catch(Exception ex) { ShowExeption(ex); }
+            catch (Exception ex) { ShowExeption(ex); }
         }
 
         public void ShowWithCurrency()

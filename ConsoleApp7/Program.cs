@@ -11,14 +11,25 @@ namespace ConsoleApp7
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите размер массива");
+
             OneDimensional arr;
-            try
+            while (true)
             {
-                arr = new OneDimensional(Convert.ToInt32(Console.ReadLine()));
+                Console.WriteLine("Введите размер массива");
+                try
+                {
+                    int n = Convert.ToInt32(Console.ReadLine());
+                    if (n < 1) throw new ArgumentOutOfRangeException("Размер массива не может быть меньше 1");
+                    else
+                    {
+                        arr = new OneDimensional(n);
+                        break;
+                    }
+                }
+                catch (Exception ex) { ShowException(ex); }
             }
-            catch (FormatException ex) { Console.WriteLine(ex); arr = new OneDimensional(9); }
             arr.Show();
+
             while (true)
             {
                 try
@@ -31,27 +42,34 @@ namespace ConsoleApp7
                         case 3: { arr.Sort(); break; }
                         case 4:
                             {
+                                bool flag = true;
+                                OneDimensional.FuncPrevByNext func = null;
                                 Console.WriteLine("Какое действие вы хотите выполнить (*,/,+,-)");
-                                OneDimensional.FuncPrevByNext func = (a, b) => a * b;
                                 switch (Console.ReadLine())
                                 {
-                                    case "*": break;
+                                    case "*": func = (a, b) => a * b; break;
                                     case "/": func = (a, b) => a / b; break;
                                     case "+": func = (a, b) => a + b; break;
                                     case "-": func = (a, b) => a - b; break;
-                                    default: Console.WriteLine("Неверное значение, выполнена функция умножения"); break;
+                                    default: Console.WriteLine("Неверное значение"); flag = false; break;
                                 }
-                                arr.PreviousByNext(func);
-                                arr.ShowWithCurrency();
+
+                                if (flag)
+                                {
+                                    arr.PreviousByNext(func);
+                                    arr.ShowWithCurrency();
+                                }
                                 break;
                             }
                         case 5: return;
                         default: { Console.WriteLine("Неверное значение, повторите ввод"); break; }
                     }
                 }
-                catch (FormatException) { Console.WriteLine("Неверное значение, повторите ввод"); }
-                catch (Exception ex) { Console.WriteLine(ex); }
+                catch (FormatException ex) { ShowException(ex); }
+                catch (Exception ex) { ShowException(ex); }
             }
         }
+
+        static void ShowException(Exception ex) { Console.WriteLine(ex); }
     }
 }
