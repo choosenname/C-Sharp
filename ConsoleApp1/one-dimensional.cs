@@ -1,7 +1,7 @@
 ﻿using SomeFunc;
 using System;
 
-namespace ConsoleApp7
+namespace КПиЯП
 {
     internal class OneDimensional
     {

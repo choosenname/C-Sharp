@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace ConsoleApp7
+namespace КПиЯП
 {
     internal class Program
     {
