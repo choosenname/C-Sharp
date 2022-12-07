@@ -9,10 +9,12 @@ namespace ConsoleApp5
     internal class MythicalCreatureEventArgs
     {
         public string Message { get; }
-        
+
         public MythicalCreatureEventArgs(string message)
-        { this.Message = message; }
+        {
+            Message = message;
+        }
     }
 
-    delegate void StudyGroupHandler(object obj, MythicalCreatureEventArgs args);
+    delegate void MythicalCreatureHandler(object obj, MythicalCreatureEventArgs args);
 }
