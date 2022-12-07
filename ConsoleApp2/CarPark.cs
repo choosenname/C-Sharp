@@ -6,6 +6,9 @@ namespace КПиЯП
     {
         Car[] cars;
 
+        public static event EventHandler<CarParkEventArgs> Event;
+        public static event EventHandler<CarParkEventArgs> OnCarParkChanged;
+
         public Car[] Cars
         {
             get => cars;
@@ -14,6 +17,8 @@ namespace КПиЯП
                 try
                 {
                     cars = value ?? throw new CarArgumentNullException("Массив машин не должен быть пустым");
+
+                    Event?.Invoke(this, new CarParkEventArgs("Создан объект класса парковка"));
                 }
                 catch (CarArgumentNullException ex)
                 {
@@ -40,7 +45,11 @@ namespace КПиЯП
                 if (func == null) throw new CarArgumentNullException("Функция должна содержать определение");
                 foreach (Car car in cars)
                 {
-                    if (func(car)) return car;
+                    if (func(car))
+                    {
+                        OnCarParkChanged?.Invoke(this, new CarParkEventArgs("Найдена машина", car));
+                        return car;
+                    }
                 }
             }
             catch (CarArgumentNullException ex)

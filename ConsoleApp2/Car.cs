@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp2;
+using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 
@@ -12,6 +13,8 @@ namespace КПиЯП
         public Color Color { get; set; }
 
         public bool IsOnParking { get; set; }
+
+        public static event EventHandler<CarEventArgs> OnCarChanged;
 
         public int Number
         {
@@ -62,6 +65,8 @@ namespace КПиЯП
             LastName = lastName;
             Color = color;
             IsOnParking = isOnParking;
+
+            OnCarChanged?.Invoke(this, new CarEventArgs("Создан объект класса машина"));
         }
 
         public override string ToString()

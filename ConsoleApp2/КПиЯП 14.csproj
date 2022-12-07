@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ArrayFunc.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="CarEventArgs.cs" />
     <Compile Include="CarPark.cs" />
     <Compile Include="CarParkEventArgs.cs" />
     <Compile Include="Exceptions.cs" />
