@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayMythicalCreature.cs" />
+    <Compile Include="ArrayMythicalCreatureEventArgs.cs" />
     <Compile Include="Dragon.cs" />
     <Compile Include="ArmoredOgr.cs" />
     <Compile Include="Exception.cs" />

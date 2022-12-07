@@ -21,6 +21,7 @@ namespace ConsoleApp5
 
         protected Regex regex = new Regex(@"\w{2,150}");
         protected Random random = new Random();
+        public static event MythicalCreatureHandler Event;
 
         public abstract int Attack();
 
@@ -53,6 +54,8 @@ namespace ConsoleApp5
             Sex = sex;
             SetHealth();
             SetDamage();
+
+            Event?.Invoke(this, new MythicalCreatureEventArgs("Создан объект класса"));
         }
 
         public virtual string Name
@@ -182,10 +185,11 @@ namespace ConsoleApp5
 
         protected virtual void ShowExeption(Exception ex)
         {
-            Console.WriteLine($"Исключение: {ex.Message}");
+            /*Console.WriteLine($"Исключение: {ex.Message}");
             Console.WriteLine($"Название приложения: {ex.Source}");
             Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
-            Console.WriteLine($"Метод: {ex.TargetSite}");
+            Console.WriteLine($"Метод: {ex.TargetSite}");*/
+            Console.WriteLine(ex);
         }
 
         public abstract object Clone();
