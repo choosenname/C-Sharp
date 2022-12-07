@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-<<<<<<< HEAD
-=======
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
->>>>>>> practice
 
 namespace ConsoleApp6
 {
@@ -15,32 +6,6 @@ namespace ConsoleApp6
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            Hours.ShowExeption = ShowExeption;
-            Student.ShowExeption = ShowExeption;
-            Students.ShowExeption = ShowExeption;
-            Random random = new Random();
-
-            Students students = new Students(new List<Student>()
-            {
-                new Student(3, 3, 12, 6, 4),
-                new Student(-1, 4, 5, 25, 7),
-                new Student(10, 4, 7, 4, 8),
-                new Student(random),
-                new Student(random),
-                new Student(random),
-                new Student(random),
-                new Student(random),
-                new Student(random),
-                new Student(random),
-                new Student(random),
-                new Student(random)
-            });
-
-            students.Show();
-            Console.WriteLine("\nЗависимость среднего балла от приоритета учащегося. \n");
-            students.ShowDependence();
-=======
             StudyGroup.Event += AlsoPrint;
             StudyGroup.Adding += AnotherPrint;
 
@@ -74,7 +39,6 @@ namespace ConsoleApp6
 
                                 Console.WriteLine("Введите количество юнош для отчисления");
                                 boys = Convert.ToInt32(Console.ReadLine());
->>>>>>> practice
 
                                 group.Deduct(girls, boys);
                                 break;

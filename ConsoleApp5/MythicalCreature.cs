@@ -185,11 +185,10 @@ namespace ConsoleApp5
 
         protected virtual void ShowExeption(Exception ex)
         {
-            /*Console.WriteLine($"Исключение: {ex.Message}");
+            Console.WriteLine($"Исключение: {ex.Message}");
             Console.WriteLine($"Название приложения: {ex.Source}");
             Console.WriteLine($"Трассировка стека: {ex.StackTrace}");
-            Console.WriteLine($"Метод: {ex.TargetSite}");*/
-            Console.WriteLine(ex);
+            Console.WriteLine($"Метод: {ex.TargetSite}");
         }
 
         public abstract object Clone();

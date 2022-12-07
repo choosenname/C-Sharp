@@ -1,18 +1,16 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleApp5
 {
-    internal class MainMC
+    internal class MainMythicalCreature
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            Dragon dragon = new Dragon("e", 50000, 250, 300, SexEnum.Male);
-=======
             MythicalCreature.Event += Print;
 
+
             Dragon dragon = new Dragon("dttttttt", 5000, 250, 300, SexEnum.Male);
->>>>>>> practice
 
             ArrayMythicalCreature array = new ArrayMythicalCreature
             {
@@ -24,10 +22,21 @@ namespace ConsoleApp5
                 new ArmoredOgr("лепешка", 300, 300, 25, SexEnum.Female, 100, 30) }
             };
 
-            Console.WriteLine(array.Find((x, y) => x.Health > y.Health));
+            Console.WriteLine(array.FindMax((x, y) => x.Health > y.Health));
             Console.WriteLine(array.MinHealth());
 
             ArrayMythicalCreature.Event += AnotherPrint;
+
+            Console.WriteLine("-------");
+
+            ArrayMythicalCreature.Func = Show;
+            ArrayMythicalCreature.Func(array.ArrayMC);
+
+            Console.WriteLine("-------");
+
+            array.Show((x, y) => Console.WriteLine(x + " " + y));
+
+            Console.WriteLine("-------");
 
             array.Clear();
             array.Add(dragon);
@@ -38,8 +47,12 @@ namespace ConsoleApp5
             Console.ReadLine();
         }
 
-<<<<<<< HEAD
-=======
+        static void Show(object[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+                Console.WriteLine(i + ". " + arr[i]);
+        }
+
         static void Print(object obj, MythicalCreatureEventArgs args)
         {
             Console.WriteLine(args.Message + " " + obj.GetType().Name);
@@ -49,7 +62,8 @@ namespace ConsoleApp5
         {
             Console.WriteLine(args.Message + " " + args.Object);
         }
->>>>>>> practice
+
+
 
         /*static void Main(string[] args)
         {

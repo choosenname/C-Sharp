@@ -6,110 +6,120 @@ namespace ConsoleApp5
 {
     internal class ArrayMythicalCreature : IList<MythicalCreature>, IComparable<ArrayMythicalCreature>, ICloneable
     {
-        public MythicalCreature[] ArrayOfMC { get; set; }
-
+        public MythicalCreature[] ArrayMC { get; set; }
 
         public static event ArrayMythicalCreatureHandler Event;
 
-        public int Count => ArrayOfMC.Length;
+        public int Count => ArrayMC.Length;
 
         public bool IsReadOnly => false;
 
-        public MythicalCreature this[int index] { get => ArrayOfMC[index]; set => ArrayOfMC[index] = value; }
+        public MythicalCreature this[int index] { get => ArrayMC[index]; set => ArrayMC[index] = value; }
 
         internal ArrayMythicalCreature()
         {
-            ArrayOfMC = new MythicalCreature[0];
+            ArrayMC = new MythicalCreature[0];
         }
 
         public ArrayMythicalCreature(MythicalCreature[] MythicalCreature)
         {
-            ArrayOfMC = MythicalCreature;
+            ArrayMC = MythicalCreature;
         }
 
         public void Add(MythicalCreature mythicalCreature)
         {
-            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length + 1];
-            for (int i = 0; i < ArrayOfMC.Length; i++)
-                NewMythicalCreatures[i] = ArrayOfMC[i];
+            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayMC.Length + 1];
+            for (int i = 0; i < ArrayMC.Length; i++)
+                NewMythicalCreatures[i] = ArrayMC[i];
 
-            NewMythicalCreatures[ArrayOfMC.Length] = mythicalCreature;
+            NewMythicalCreatures[ArrayMC.Length] = mythicalCreature;
 
             Event?.Invoke(this, new ArrayMythicalCreatureEventArgs("Добавлен объект", mythicalCreature));
 
-            ArrayOfMC = NewMythicalCreatures;
+            ArrayMC = NewMythicalCreatures;
         }
 
         public void Add(MythicalCreature[] value)
         {
-            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[value.Length + ArrayOfMC.Length];
+            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[value.Length + ArrayMC.Length];
 
-            for (int i = 0; i < ArrayOfMC.Length; i++)
+            for (int i = 0; i < ArrayMC.Length; i++)
             {
-                NewMythicalCreatures[i] = ArrayOfMC[i];
+                NewMythicalCreatures[i] = ArrayMC[i];
             }
-            for (int i = ArrayOfMC.Length, j = 0; i < NewMythicalCreatures.Length; i++, j++)
+            for (int i = ArrayMC.Length, j = 0; i < NewMythicalCreatures.Length; i++, j++)
             {
                 NewMythicalCreatures[i] = value[j];
             }
-            ArrayOfMC = NewMythicalCreatures;
+            ArrayMC = NewMythicalCreatures;
         }
 
         public void Remove(int index)
         {
-            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length - 1];
-            for (int i = 0, j = 0; i < ArrayOfMC.Length && j < NewMythicalCreatures.Length; i++)
+            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayMC.Length - 1];
+            for (int i = 0, j = 0; i < ArrayMC.Length && j < NewMythicalCreatures.Length; i++)
             {
                 if (i != index)
                 {
-                    NewMythicalCreatures[j] = ArrayOfMC[i];
+                    NewMythicalCreatures[j] = ArrayMC[i];
                     j++;
                 }
             }
 
-            Event?.Invoke(this, new ArrayMythicalCreatureEventArgs("Удален объект", ArrayOfMC[index]));
+            Event?.Invoke(this, new ArrayMythicalCreatureEventArgs("Удален объект", ArrayMC[index]));
 
-            ArrayOfMC = NewMythicalCreatures;
+            ArrayMC = NewMythicalCreatures;
         }
 
         public override string ToString()
         {
             string str = null;
             for (int i = 0; i < Count; i++)
-                str += ArrayOfMC[i] + "\n";
+                str += ArrayMC[i] + "\n";
             return str;
+        }
+
+        public delegate void ShowFunc(object[] arr);
+        public static ShowFunc Func;
+
+        public delegate void ArrayFunc(int index, MythicalCreature item);
+
+        public void Show(ArrayFunc func)
+        {
+            for (int i = 0; i < Count; i++)
+                func(i, ArrayMC[i]);
         }
 
         public void Show()
         {
             for (int i = 0; i < Count; i++)
-                Console.WriteLine(i + ". " + ArrayOfMC[i]);
+                Console.WriteLine(i + ". " + ArrayMC[i]);
         }
 
         public delegate bool Compare(MythicalCreature obj1, MythicalCreature obj2);
 
-        public MythicalCreature Find(Compare func)
+        public MythicalCreature FindMax(Compare func)
         {
-            if (ArrayOfMC.Length < 1) return null;
+            if (ArrayMC.Length < 1) return null;
 
-            MythicalCreature max = ArrayOfMC[0];
-            for (int i = 1; i < ArrayOfMC.Length; i++)
+            MythicalCreature max = ArrayMC[0];
+            for (int i = 1; i < ArrayMC.Length; i++)
             {
-                if (func(max, ArrayOfMC[i]))
-                    max = ArrayOfMC[i];
+                if (func(max, ArrayMC[i]))
+                    max = ArrayMC[i];
             }
             return max;
         }
 
         public MythicalCreature MaxDamage()
         {
-            if (ArrayOfMC.Length > 0)
+            if (ArrayMC.Length > 0)
             {
-                MythicalCreature max = ArrayOfMC[0];
-                for (int i = 1; i < ArrayOfMC.Length; i++)
+                MythicalCreature max = ArrayMC[0];
+                for (int i = 1; i < ArrayMC.Length; i++)
                 {
-                    if (max.Damage < ArrayOfMC[i].Damage)
-                        max = ArrayOfMC[i];
+                    if (max.Damage < ArrayMC[i].Damage)
+                        max = ArrayMC[i];
                 }
                 return max;
             }
@@ -118,13 +128,13 @@ namespace ConsoleApp5
 
         public MythicalCreature MinHealth()
         {
-            if (ArrayOfMC.Length > 0)
+            if (ArrayMC.Length > 0)
             {
-                MythicalCreature min = ArrayOfMC[0];
-                for (int i = 1; i < ArrayOfMC.Length; i++)
+                MythicalCreature min = ArrayMC[0];
+                for (int i = 1; i < ArrayMC.Length; i++)
                 {
-                    if (min.Health > ArrayOfMC[i].Health)
-                        min = ArrayOfMC[i];
+                    if (min.Health > ArrayMC[i].Health)
+                        min = ArrayMC[i];
                 }
                 return min;
             }
@@ -133,23 +143,23 @@ namespace ConsoleApp5
 
         public void SortByName()
         {
-            Array.Sort(ArrayOfMC);
+            Array.Sort(ArrayMC);
         }
         public int Figth(ArrayMythicalCreature obj)
         {
-            while (ArrayOfMC.Length > 0 && obj.ArrayOfMC.Length > 0)
+            while (ArrayMC.Length > 0 && obj.ArrayMC.Length > 0)
             {
-                int flag = ArrayOfMC[0].Figth(obj.ArrayOfMC[0]);
+                int flag = ArrayMC[0].Figth(obj.ArrayMC[0]);
                 if (flag > 0)
                 {
-                    Console.WriteLine("Победитель " + ArrayOfMC[0]);
-                    Console.WriteLine(obj.ArrayOfMC[0] + " выбывает");
+                    Console.WriteLine("Победитель " + ArrayMC[0]);
+                    Console.WriteLine(obj.ArrayMC[0] + " выбывает");
                     obj.Remove(0);
                 }
                 else if (flag < 0)
                 {
-                    Console.WriteLine("Победитель " + obj.ArrayOfMC[0]);
-                    Console.WriteLine(ArrayOfMC[0] + " выбывает");
+                    Console.WriteLine("Победитель " + obj.ArrayMC[0]);
+                    Console.WriteLine(ArrayMC[0] + " выбывает");
                     Remove(0);
                 }
                 else
@@ -159,14 +169,14 @@ namespace ConsoleApp5
                     obj.Remove(0);
                 }
             }
-            return ArrayOfMC.Length - obj.ArrayOfMC.Length;
+            return ArrayMC.Length - obj.ArrayMC.Length;
         }
 
         public int IndexOf(MythicalCreature item)
         {
             for (int i = 0; i < Count; i++)
             {
-                if (ArrayOfMC[i] == item)
+                if (ArrayMC[i] == item)
                 {
                     return i;
                 }
@@ -176,23 +186,23 @@ namespace ConsoleApp5
 
         public void Insert(int index, MythicalCreature item)
         {
-            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayOfMC.Length + 1];
+            MythicalCreature[] NewMythicalCreatures = new MythicalCreature[ArrayMC.Length + 1];
 
             if (index > 0 && index < Count)
             {
                 for (int i = 0; i < index; i++)
                 {
-                    NewMythicalCreatures[i] = ArrayOfMC[i];
+                    NewMythicalCreatures[i] = ArrayMC[i];
                 }
 
                 NewMythicalCreatures[index] = item;
 
                 for (int i = Count; i > index; i--)
                 {
-                    NewMythicalCreatures[i] = ArrayOfMC[i - 1];
+                    NewMythicalCreatures[i] = ArrayMC[i - 1];
                 }
             }
-            ArrayOfMC = NewMythicalCreatures;
+            ArrayMC = NewMythicalCreatures;
         }
 
         public void RemoveAt(int index)
@@ -203,22 +213,24 @@ namespace ConsoleApp5
             {
                 for (int i = index, j = 0; i < Count - 1; i++, j++)
                 {
-                    NewMythicalCreatures[j] = ArrayOfMC[i + 1];
+                    NewMythicalCreatures[j] = ArrayMC[i + 1];
                 }
             }
-            ArrayOfMC = NewMythicalCreatures;
+            ArrayMC = NewMythicalCreatures;
         }
 
         public void Clear()
         {
-            ArrayOfMC = new MythicalCreature[0];
+            ArrayMC = new MythicalCreature[0];
+
+            Event?.Invoke(this, new ArrayMythicalCreatureEventArgs("Массив очищен", null));
         }
 
         public bool Contains(MythicalCreature item)
         {
             if (item == null) return false;
 
-            foreach (MythicalCreature mc in ArrayOfMC)
+            foreach (MythicalCreature mc in ArrayMC)
                 if (mc == item) return true;
 
             return false;
@@ -228,7 +240,7 @@ namespace ConsoleApp5
         {
             for (int i = 0; i < Count; i++)
             {
-                array.SetValue(ArrayOfMC[i], arrayIndex++);
+                array.SetValue(ArrayMC[i], arrayIndex++);
             }
         }
 
@@ -236,7 +248,7 @@ namespace ConsoleApp5
         {
             for (int i = 0; i < Count; i++)
             {
-                if (ArrayOfMC[i].CompareTo(item) == 0)
+                if (ArrayMC[i].CompareTo(item) == 0)
                 {
                     Remove(i);
                     return true;
@@ -245,18 +257,18 @@ namespace ConsoleApp5
             return false;
         }
 
-        public IEnumerator<MythicalCreature> GetEnumerator() => new ArrayMythicalCreatureEnum(ArrayOfMC);
+        public IEnumerator<MythicalCreature> GetEnumerator() => new ArrayMythicalCreatureEnum(ArrayMC);
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public int CompareTo(ArrayMythicalCreature other)
         {
-            return ArrayOfMC.Length - other.ArrayOfMC.Length;
+            return ArrayMC.Length - other.ArrayMC.Length;
         }
 
         public object Clone()
         {
-            return new ArrayMythicalCreature(ArrayOfMC);
+            return new ArrayMythicalCreature(ArrayMC);
         }
     }
 

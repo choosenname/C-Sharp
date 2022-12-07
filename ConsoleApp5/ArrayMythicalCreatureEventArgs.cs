@@ -8,9 +8,9 @@ namespace ConsoleApp5
 {
     internal class ArrayMythicalCreatureEventArgs
     {
-        public string Message { get; }
+        public string Message { get; } = null;
 
-        public MythicalCreature Object { get; }
+        public MythicalCreature Object { get; } = null;
 
         public ArrayMythicalCreatureEventArgs(string message, MythicalCreature obj)
         {
