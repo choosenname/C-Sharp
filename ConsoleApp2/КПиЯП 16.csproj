@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>ConsoleApp2</RootNamespace>
     <AssemblyName>ConsoleApp2</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,17 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayFunc.cs" />
-    <Compile Include="Car.cs" />
-    <Compile Include="CarEventArgs.cs" />
-    <Compile Include="CarPark.cs" />
-    <Compile Include="CarParkEventArgs.cs" />
-    <Compile Include="Exceptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Libraries.csproj">
+      <Project>{a4280f0e-ed29-4de7-80c8-4f6077cb1c2a}</Project>
+      <Name>Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

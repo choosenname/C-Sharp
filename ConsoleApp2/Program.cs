@@ -1,5 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using SomeFunc;
+using System;
+using System.IO;
 
 namespace КПиЯП
 {
@@ -7,23 +8,37 @@ namespace КПиЯП
     {
         static void Main(string[] args)
         {
-            Car.OnCarChanged += (x, y) => Console.WriteLine(y.Message);
-            CarPark.Event += (x, y) => Console.WriteLine(y.Message);
-            CarPark.OnCarParkChanged += (x, y) => Console.WriteLine(y.Message + " " + y.Car);
+            ArrayFunc.EnterArr(out int[] arr, 127);
+            //ArrayFunc.PrintArr(arr);
 
-            CarPark carPark = new CarPark(new Car[] {
-                new Car(4578, "Игорь Брусков", Color.Aqua, true),
-                new Car(5236, "Аебров", Color.Tan, false),
-                new Car(778, "Курсед", Color.Magenta, true) });
+            string path = @"C:\Users\admin\Desktop\Бебра.doci";
+            string path1 = @"C:\Users\admin\Desktop\+.+";
+            //File.Create(path);
 
-            Console.WriteLine("Найти машину с водителем Курсед " + carPark.FindCars(car => car.LastName == "Курсед"));
+            File.WriteAllText(path, ArrayFunc.OutArr(arr));
+            string[] str = File.ReadAllText(path).Split(' ');
 
-            Console.WriteLine("Вывести все машины на парковке");
-            carPark.ShowCars(car => car.IsOnParking);
+            try
+            {
+                File.WriteAllText(path1, "");
+                while (true)
+                {
+                    Console.WriteLine("Введите число k");
+                    int index = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("----------");
-            carPark[2] = new Car(1488, "Боб", Color.Azure, false);
-            Console.WriteLine(carPark[2]);
+                    if (index < 1 || index > str.Length)
+                        File.AppendAllText(path1, Convert.ToString(Convert.ToChar(128)));
+                    else
+                        File.AppendAllText(path1, str[index - 1]);
+                    File.AppendAllText(path1, " ");
+                }
+            }
+            catch (FormatException) { }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
+            Console.WriteLine(File.ReadAllText(path));
+            Console.WriteLine("-------");
+            Console.WriteLine(File.ReadAllText(path1));
         }
     }
 }
