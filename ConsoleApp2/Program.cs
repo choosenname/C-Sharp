@@ -11,13 +11,22 @@ namespace КПиЯП
             ArrayFunc.EnterArr(out int[] arr, 127);
             //ArrayFunc.PrintArr(arr);
 
-            string path = @"C:\Users\admin\Desktop\Бебра.doci";
-            string path1 = @"C:\Users\admin\Desktop\+.+";
+            string path = @"C:\Users\admin\Desktop\Labsы\Бебра.doci";
+            string path1 = @"C:\Users\admin\Desktop\Labsы\+.+";
             //File.Create(path);
 
             File.WriteAllText(path, ArrayFunc.OutArr(arr));
             string[] str = File.ReadAllText(path).Split(' ');
 
+            EnterFile(str, path1);
+
+            Console.WriteLine(File.ReadAllText(path));
+            Console.WriteLine("-------");
+            Console.WriteLine(File.ReadAllText(path1));
+        }
+
+        static void EnterFile(string[] str, string path1)
+        {
             try
             {
                 File.WriteAllText(path1, "");
@@ -35,10 +44,6 @@ namespace КПиЯП
             }
             catch (FormatException) { }
             catch (Exception ex) { Console.WriteLine(ex); }
-
-            Console.WriteLine(File.ReadAllText(path));
-            Console.WriteLine("-------");
-            Console.WriteLine(File.ReadAllText(path1));
         }
     }
 }

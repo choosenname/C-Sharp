@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15", "ConsoleApp1\ПП 15.csproj", "{4DF0E362-1066-4F19-9CA2-1810C31D15F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15.1", "ConsoleApp1\ПП 15.1.csproj", "{4DF0E362-1066-4F19-9CA2-1810C31D15F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 16", "ConsoleApp2\КПиЯП 16.csproj", "{274953FC-F937-4CB2-BACF-1B15023B0165}"
 EndProject

@@ -58,7 +58,7 @@ namespace ClassLibrary1
 
             double Btmp = Math.Pow(b.RealPart, 2) + Math.Pow(b.ImaginaryPart, 2);
 
-            return new ComplexNumber(a.RealPart/Btmp, a.ImaginaryPart/Btmp);
+            return new ComplexNumber(a.RealPart / Btmp, a.ImaginaryPart / Btmp);
         }
     }
 }
