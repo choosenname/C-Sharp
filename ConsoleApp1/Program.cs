@@ -20,13 +20,12 @@ namespace КПиЯП
 
             FindAllWords(file, LetterOfEndWord(file));
 
-            file.Dispose();
+            file.Close();
         }
 
         static void WriteFile(FileStream file)
         {
             Random random = new Random();
-
             int wordsCount = 14;
             for (int i = 0; i < wordsCount; i++)
             {

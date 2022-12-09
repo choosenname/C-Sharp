@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MythicalCreaturesArray.cs" />
-    <Compile Include="MythicalCreature.cs" />
     <Compile Include="ConsoleApp3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

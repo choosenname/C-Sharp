@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15.1", "ConsoleApp1\П
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 16", "ConsoleApp2\КПиЯП 16.csproj", "{274953FC-F937-4CB2-BACF-1B15023B0165}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp3", "ConsoleApp3\ConsoleApp3.csproj", "{07BDAB22-9143-4578-89A3-8D3F6B6B0ABC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15.2", "ConsoleApp3\ПП 15.2.csproj", "{07BDAB22-9143-4578-89A3-8D3F6B6B0ABC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 15", "ConsoleApp4\КПиЯП 15.csproj", "{D105D442-4E66-46B6-8E56-8DFBB064A20F}"
 EndProject
