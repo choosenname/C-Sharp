@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace КПиЯП
+namespace ConsoleApp1
 {
-    internal class Program
+    internal class Program1
     {
         static void Main(string[] args)
         {

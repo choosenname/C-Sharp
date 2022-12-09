@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace ConsoleApp3
+namespace ConsoleApp1
 {
-    internal class ConsoleApp3
+    internal class Program2
     {
         static void Main(string[] args)
         {

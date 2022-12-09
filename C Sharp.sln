@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15.1", "ConsoleApp1\ПП 15.1.csproj", "{4DF0E362-1066-4F19-9CA2-1810C31D15F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15", "ConsoleApp1\ПП 15.csproj", "{4DF0E362-1066-4F19-9CA2-1810C31D15F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 16", "ConsoleApp2\КПиЯП 16.csproj", "{274953FC-F937-4CB2-BACF-1B15023B0165}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 15", "ConsoleApp4\КПиЯП 15.csproj", "{D105D442-4E66-46B6-8E56-8DFBB064A20F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp5", "ConsoleApp5\ConsoleApp5.csproj", "{8B18E512-9190-4847-8D17-F8F1AAB40634}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{D9CBCCF0-3D3A-44A4-BA67-A1FA841162BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries", "Libraries\Libraries.csproj", "{A4280F0E-ED29-4DE7-80C8-4F6077CB1C2A}"
 EndProject
@@ -43,10 +41,6 @@ Global
 		{8B18E512-9190-4847-8D17-F8F1AAB40634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B18E512-9190-4847-8D17-F8F1AAB40634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B18E512-9190-4847-8D17-F8F1AAB40634}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9CBCCF0-3D3A-44A4-BA67-A1FA841162BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9CBCCF0-3D3A-44A4-BA67-A1FA841162BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9CBCCF0-3D3A-44A4-BA67-A1FA841162BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9CBCCF0-3D3A-44A4-BA67-A1FA841162BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4280F0E-ED29-4DE7-80C8-4F6077CB1C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4280F0E-ED29-4DE7-80C8-4F6077CB1C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4280F0E-ED29-4DE7-80C8-4F6077CB1C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
