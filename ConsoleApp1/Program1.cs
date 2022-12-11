@@ -14,7 +14,7 @@ namespace ConsoleApp1
 
             WriteFile(file);
 
-            Console.WriteLine(LetterOfEndWord(file));
+            //Console.WriteLine(LetterOfEndWord(file));
 
             FindAllWords(file, LetterOfEndWord(file));
 

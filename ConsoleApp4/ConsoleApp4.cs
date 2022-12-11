@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using ClassLibrary1;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Formatters.Soap;
+using System.Xml.Serialization;
 
 namespace ConsoleApp4
 {
@@ -13,19 +11,26 @@ namespace ConsoleApp4
     {
         static void Main()
         {
-            ComplexNumber number = new ComplexNumber(23, 56);
-            ComplexNumber number1 = new ComplexNumber(4, 17);
+            Random random = new Random();
+            Motherboard motherboard = new Motherboard(random);
 
-            Console.Write($"({number}) + ({number1}) = ");
+            Formattering(new BinaryFormatter(), "Binary.dat", motherboard);
 
-            ComplexNumber number2 = number + number1;
-            Console.WriteLine(number2.ToString());
+            Formattering(new SoapFormatter(), "Soap.soap", motherboard);
 
-            Console.WriteLine(new ComplexNumber(-2, 1) - new ComplexNumber(Math.Sqrt(3), 5));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Motherboard));
+            using (FileStream fs = new FileStream(@"C:\Users\admin\Desktop\Labsы\КПиЯП17\xml.xml", FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fs, motherboard);
+            }
+        }
 
-            Console.WriteLine(new ComplexNumber(1, 3) * new ComplexNumber(4, -2));
-
-            Console.WriteLine(new ComplexNumber(13, 1) / new ComplexNumber(7, -6));
+        static void Formattering(IFormatter formatter, string filePath, object obj)
+        {
+            using (FileStream fs = new FileStream(@"C:\Users\admin\Desktop\Labsы\КПиЯП17\" + filePath, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, obj);
+            }
         }
     }
 }
