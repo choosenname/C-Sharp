@@ -2,6 +2,7 @@
 
 namespace ConsoleApp5
 {
+    [Serializable]
     internal class Ogr : MythicalCreature
     {
         int weaponDamage;

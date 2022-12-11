@@ -1,15 +1,17 @@
-﻿namespace ConsoleApp5
+﻿using System;
+
+namespace ConsoleApp5
 {
-    internal class Dragon : MythicalCreature
+    [Serializable]
+    public class Dragon : MythicalCreature
     {
         int fireDamage;
-
         public int FireDamage
         {
             get => fireDamage;
-            protected set
+            set
             {
-                fireDamage = value < 0 ? 0 : value;
+                fireDamage = Damage / 3 + Damage / 2;
             }
         }
 
@@ -17,6 +19,8 @@
 
         public Dragon(string name, int height, double weight, int age, SexEnum sex) : base(name, height, weight, age, sex)
         { SetFireDamage(); }
+
+        public Dragon() : base() { }
 
         protected override (int, int) HeightRange { get; } = (1, 5000);
 

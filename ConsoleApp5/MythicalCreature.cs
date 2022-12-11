@@ -9,7 +9,9 @@ namespace ConsoleApp5
         Male,
         Female
     }
-    internal abstract class MythicalCreature : IComparable<MythicalCreature>, ICloneable
+
+    [Serializable]
+    public abstract class MythicalCreature : IComparable<MythicalCreature>, ICloneable
     {
         string name;
         SexEnum sex;
@@ -21,6 +23,11 @@ namespace ConsoleApp5
 
         protected Regex regex = new Regex(@"\w{2,150}");
         protected Random random = new Random();
+
+        [NonSerialized] private readonly (int, int) heightRange = (1, 50000);
+        [NonSerialized] private readonly (int, int) weightRange = (1, 50000);
+        [NonSerialized] private readonly (int, int) ageRange = (1, 10000);
+
         public static event MythicalCreatureHandler Event;
 
         public abstract int Attack();
@@ -36,13 +43,13 @@ namespace ConsoleApp5
         public virtual int Health
         {
             get => health;
-            protected set => health = value < 0 ? 0 : value;
+            set => health = (int)Math.Round(weight) + (height / age);
         }
 
         public virtual int Damage
         {
             get => damage;
-            protected set => damage = value < 0 ? 0 : value;
+            set => damage = ((int)Math.Round(weight) + (height / age)) / 12;
         }
 
         public MythicalCreature(string name, int height, double weight, int age, SexEnum sex)
@@ -52,6 +59,19 @@ namespace ConsoleApp5
             Weight = weight;
             Age = age;
             Sex = sex;
+            SetHealth();
+            SetDamage();
+
+            Event?.Invoke(this, new MythicalCreatureEventArgs("Создан объект класса"));
+        }
+
+        public MythicalCreature()
+        {
+            Name = "";
+            Height = 1;
+            Weight = 1;
+            Age = 1;
+            Sex = SexEnum.None;
             SetHealth();
             SetDamage();
 
@@ -76,8 +96,7 @@ namespace ConsoleApp5
             }
         }
 
-        protected virtual (int, int) HeightRange { get; } = (1, 50000);
-
+        protected virtual (int, int) HeightRange => heightRange;
         public virtual int Height
         {
             get => height;
@@ -96,8 +115,7 @@ namespace ConsoleApp5
             }
         }
 
-        protected virtual (int, int) WeightRange { get; } = (1, 50000);
-
+        protected virtual (int, int) WeightRange => weightRange;
         public virtual double Weight
         {
             get => weight;
@@ -116,8 +134,7 @@ namespace ConsoleApp5
             }
         }
 
-        protected virtual (int, int) AgeRange { get; } = (1, 10000);
-
+        protected virtual (int, int) AgeRange => ageRange;
         public virtual int Age
         {
             get => age;

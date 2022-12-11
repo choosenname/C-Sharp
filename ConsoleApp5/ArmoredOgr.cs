@@ -2,6 +2,7 @@
 
 namespace ConsoleApp5
 {
+    [Serializable]
     internal class ArmoredOgr : Ogr
     {
         int armorProtection;
