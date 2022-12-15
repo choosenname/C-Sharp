@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace ConsoleApp5
 {
-    internal class ArrayMythicalCreature : IList<MythicalCreature>, IComparable<ArrayMythicalCreature>, ICloneable
+    [Serializable]
+    public class ArrayMythicalCreature : IList<MythicalCreature>, IComparable<ArrayMythicalCreature>, ICloneable
     {
         public MythicalCreature[] ArrayMC { get; set; }
 

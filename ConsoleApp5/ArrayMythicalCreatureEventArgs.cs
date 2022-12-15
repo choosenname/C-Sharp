@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp5
 {
-    internal class ArrayMythicalCreatureEventArgs
+    public class ArrayMythicalCreatureEventArgs
     {
         public string Message { get; } = null;
 
@@ -13,5 +13,5 @@
         }
     }
 
-    delegate void ArrayMythicalCreatureHandler(object obj, ArrayMythicalCreatureEventArgs args);
+    public delegate void ArrayMythicalCreatureHandler(object obj, ArrayMythicalCreatureEventArgs args);
 }

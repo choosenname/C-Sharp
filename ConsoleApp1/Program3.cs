@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
@@ -86,7 +80,7 @@ namespace ConsoleApp1
             Console.WriteLine($"Время создания каталога: {directoryInfo.CreationTime}");
             Console.WriteLine($"Корневой каталог: {directoryInfo.Root}");
 
-            foreach(FileInfo fileInfo in directoryInfo.GetFiles())
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles())
             {
                 ShowInfo(fileInfo);
             }

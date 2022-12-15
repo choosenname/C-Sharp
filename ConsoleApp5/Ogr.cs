@@ -3,17 +3,21 @@
 namespace ConsoleApp5
 {
     [Serializable]
-    internal class Ogr : MythicalCreature
+    public class Ogr : MythicalCreature
     {
         int weaponDamage;
+
+        [NonSerialized]
+        private readonly (int, int) weaponDamageRange = (0, 100);
 
         public Ogr(string name, int height, double weight, int age, SexEnum sex, int weaponDamage) : base(name, height, weight, age, sex)
         {
             WeaponDamage = weaponDamage;
         }
 
-        protected virtual (int, int) WeaponDamageRange { get; } = (0, 100);
+        public Ogr() : base() { }
 
+        protected virtual (int, int) WeaponDamageRange => weaponDamageRange;
         public virtual int WeaponDamage
         {
             get => weaponDamage;
@@ -31,12 +35,6 @@ namespace ConsoleApp5
                 catch (Exception ex) { ShowExeption(ex); }
             }
         }
-
-        protected override (int, int) WeightRange { get; } = (1, 450);
-
-        protected override (int, int) HeightRange { get; } = (1, 500);
-
-        protected override (int, int) AgeRange { get; } = (1, 100);
 
         public override int Attack()
         {

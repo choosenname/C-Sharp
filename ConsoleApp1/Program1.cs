@@ -7,6 +7,8 @@ namespace ConsoleApp1
 {
     internal class Program1
     {
+        const int wordsCount = 20;
+
         static void Main(string[] args)
         {
             string path = @"C:\Users\admin\Desktop\Labsы\09090.9090";
@@ -24,7 +26,6 @@ namespace ConsoleApp1
         static void WriteFile(FileStream file)
         {
             Random random = new Random();
-            int wordsCount = 14;
             for (int i = 0; i < wordsCount; i++)
             {
                 byte[] arr = null;

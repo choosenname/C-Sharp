@@ -3,9 +3,10 @@
 namespace ConsoleApp5
 {
     [Serializable]
-    internal class Wyvern : Dragon
+    public class Wyvern : Dragon
     {
         int diveDamage;
+        [NonSerialized] private readonly (int, int) diveDamageRange = (1, 100);
 
         public override void SetFireDamage() { FireDamage = Damage / 3 + Damage / 2 + DiveDamage; }
 
@@ -15,8 +16,9 @@ namespace ConsoleApp5
             SetFireDamage();
         }
 
-        protected virtual (int, int) DiveDamageRange { get; } = (1, 100);
+        public Wyvern() : base() { }
 
+        protected virtual (int, int) DiveDamageRange => diveDamageRange;
         public int DiveDamage
         {
             get => diveDamage;
@@ -34,10 +36,6 @@ namespace ConsoleApp5
                 catch (Exception ex) { ShowExeption(ex); }
             }
         }
-
-        protected override (int, int) WeightRange { get; } = (1, 750);
-
-        protected override (int, int) HeightRange { get; } = (1, 750);
 
         public override void TakeHit(int damage)
         {

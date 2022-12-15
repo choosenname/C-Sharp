@@ -3,7 +3,7 @@
 namespace ConsoleApp5
 {
     [Serializable]
-    internal class ArmoredOgr : Ogr
+    public class ArmoredOgr : Ogr
     {
         int armorProtection;
 
@@ -12,7 +12,7 @@ namespace ConsoleApp5
             ArmorProtection = armorProtection;
         }
 
-        protected virtual (int, int) ArmorProtectionRange { get; } = (0, 50);
+        public ArmoredOgr() : base() { }
 
         public virtual int ArmorProtection
         {

@@ -22,12 +22,6 @@ namespace ConsoleApp5
 
         public Dragon() : base() { }
 
-        protected override (int, int) HeightRange { get; } = (1, 5000);
-
-        protected override (int, int) WeightRange { get; } = (1, 2000);
-
-        protected override (int, int) AgeRange { get; } = (1, 1000);
-
         public override int Attack()
         {
             switch (random.Next(0, 5))
