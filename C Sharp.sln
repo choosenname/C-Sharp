@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ПП 15", "ConsoleApp1\ПП 15.csproj", "{4DF0E362-1066-4F19-9CA2-1810C31D15F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 16", "ConsoleApp2\КПиЯП 16.csproj", "{274953FC-F937-4CB2-BACF-1B15023B0165}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 18.1", "ConsoleApp2\КПиЯП 18.1.csproj", "{274953FC-F937-4CB2-BACF-1B15023B0165}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp3\ConsoleApp.csproj", "{07BDAB22-9143-4578-89A3-8D3F6B6B0ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 17", "ConsoleApp4\КПиЯП 17.csproj", "{D105D442-4E66-46B6-8E56-8DFBB064A20F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КПиЯП 18.2", "ConsoleApp4\КПиЯП 18.2.csproj", "{D105D442-4E66-46B6-8E56-8DFBB064A20F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp5", "ConsoleApp5\ConsoleApp5.csproj", "{8B18E512-9190-4847-8D17-F8F1AAB40634}"
 EndProject

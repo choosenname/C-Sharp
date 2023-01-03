@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,36 +11,148 @@ namespace ConsoleApp3
     {
         static void Main(string[] args)
         {
-            int[] nums2 = { 1, 1, 0, 0, 4, 5, 0, 10, 1, 0, 19, 120, 120 };
-
-            int first = 0;
-            int end = nums2.Length - 1;
-            int result = 0;
-
-            for (int i = 0; i < nums2.Length; i++)
+            Hashtable catalog = new Hashtable();
+            while (true)
             {
-                if (nums2[i] == 0)
+                Console.WriteLine("1 - заполнить случайно, 2 - вывести, 3 - добавить диск, 4 - добавить музыку, 5 - поиск по исполнителю, 6 - удалить исполнителя");
+                switch (Convert.ToInt32(Console.ReadLine()))
                 {
-                    first = i;
-                    break;
+                    case 1:
+                        {
+                            catalog = GenCD();
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            foreach (DictionaryEntry item in catalog)
+                            {
+                                Console.WriteLine("Исполнитель: " + item.Key);
+                                foreach (DictionaryEntry item1 in (Hashtable)item.Value)
+                                {
+                                    Console.WriteLine(item1.Value + " ---- " + item1.Key);
+                                }
+                            }
+                            break;
+                        }
+
+                    case 3:
+                        {
+                            Console.WriteLine("Сколько дисков добавить");
+                            int len = Convert.ToInt32(Console.ReadLine());
+                            for (int i = 0; i < len; i++)
+                            {
+                                Console.WriteLine("Введите исполнителя");
+                                var str = Console.ReadLine();
+                                catalog.Add(str, EnterMusic());
+                            }
+                            break;
+                        }
+
+                    case 4:
+                        {
+                            Console.WriteLine("Введите исполнителя");
+                            string str = Console.ReadLine();
+                            foreach (DictionaryEntry item in catalog)
+                            {
+                                if ((string)item.Key == str)
+                                {
+                                    Console.WriteLine("Сколько песен добавить");
+                                    int len = Convert.ToInt32(Console.ReadLine());
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        Console.WriteLine("Введите название");
+                                        var str1 = Console.ReadLine();
+
+                                        Console.WriteLine("Введите продолжительность песни");
+                                        var str2 = Console.ReadLine();
+
+                                        var b = str2.Split(new char[] { ':' });
+                                        ((Hashtable)item.Value).Add(new TimeSpan(Convert.ToInt32(b[0]), Convert.ToInt32(b[1]), Convert.ToInt32(b[2])), str1);
+                                    }
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+
+                    case 5:
+                        {
+                            Console.WriteLine("Введите исполнителя");
+                            string str = Console.ReadLine();
+                            foreach (DictionaryEntry item in catalog)
+                            {
+                                if ((string)item.Key == str)
+                                {
+                                    foreach (DictionaryEntry item1 in (Hashtable)item.Value)
+                                    {
+                                        Console.WriteLine(item1.Value + " ---- " + item1.Key);
+                                    }
+                                }
+                            }
+                            break;
+                        }
+
+                    case 6:
+                        {
+                            Console.WriteLine("Введите исполнителя");
+                            string str = Console.ReadLine();
+                            catalog.Remove(str);
+                            break;
+                        }
                 }
             }
+        }
 
-            for (int i = nums2.Length - 1; i > -1; i--)
+        static Hashtable EnterMusic()
+        {
+            Hashtable Music = new Hashtable();
+            Console.WriteLine("Сколько песен добавить");
+            int len = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < len; i++)
             {
-                if (nums2[i] == 0)
+                Console.WriteLine("Введите название");
+                var str = Console.ReadLine();
+
+                Console.WriteLine("Введите продолжительность песни");
+                var str1 = Console.ReadLine();
+
+                var b = str1.Split(new char[] { ':' });
+                Music.Add(new TimeSpan(Convert.ToInt32(b[0]), Convert.ToInt32(b[1]), Convert.ToInt32(b[2])), str);
+            }
+            return Music;
+        }
+
+        static Hashtable GenMusic()
+        {
+            Hashtable Music = new Hashtable();
+            Random random = new Random();
+            for (int j = 0; j < random.Next(1, 12); j++)
+            {
+                string str = "";
+                for (int i = 0; i < random.Next(2, 12); i++)
                 {
-                    end = i;
-                    break;
+                    str += (char)random.Next('a', 'z');
                 }
+                Music.Add(new TimeSpan(0, random.Next(120), random.Next(60)), str);
             }
+            return Music;
+        }
 
-            for(int i = first; i < end; i++)
+        static Hashtable GenCD()
+        {
+            Hashtable CD = new Hashtable();
+            Random random = new Random();
+            for (int j = 0; j < random.Next(1, 12); j++)
             {
-                result += nums2[i];
+                string str = "";
+                for (int i = 0; i < random.Next(1, 12); i++)
+                {
+                    str += (char)random.Next('a', 'z');
+                }
+                CD.Add(str, GenMusic());
             }
-
-            Console.WriteLine(result);
+            return CD;
         }
     }
 }
